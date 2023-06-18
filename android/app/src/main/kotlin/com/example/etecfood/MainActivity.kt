@@ -1,4 +1,4 @@
-package br.com.daniloglcoder.etecfood
+package com.example.etecfood
 
 import io.flutter.embedding.android.FlutterActivity
 
