@@ -9,6 +9,7 @@ class Root extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '',
+      debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       routes: {
         '/login': (context) => LoginPage(),
