@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
                                     MaterialStatePropertyAll(Colors.red)),
                             onPressed: () {},
                             child: Text(
-                              'Castradar-se',
+                              'Cadastrar-se',
                               style: TextStyle(fontSize: 20.0),
                             ))),
                   ],
