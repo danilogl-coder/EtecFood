@@ -6,111 +6,115 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(21, 22, 36, 5),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // <- Filho da Coluna
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // <- filho da linha
-                Container(
-                  // <- Logo
-                  padding: EdgeInsets.only(top: 5.0),
-                  height: 300.0,
-                  width: 300.0,
-                  child: Image.asset(
-                    'assets/image/logo.png',
-                    fit: BoxFit.cover,
+      //Configurações de cores
+      backgroundColor: const Color.fromRGBO(37, 39, 62, 1.0),
+      //Safe Area e Container
+      body: SafeArea(
+          child: Container(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              //Logo do aplicativo
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    height: 300,
+                    child: Image.asset(
+                      'assets/image/logo.png',
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-                // <- Texto (Entrar)
-                padding: EdgeInsets.only(right: 300.0),
-                child: Text(
-                  "Entrar",
-                  style: TextStyle(fontSize: 19.0),
-                )),
-            Form(
+                ],
+              ),
+              //Texto Entrar
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Entrar",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                  )
+                ],
+              ),
+              //Campo de E-mail e Cpf
+              Container(
+                padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 400.0,
-                    child: TextFormField(
+                  children: [
+                    //Campo de E-mail
+                    TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Digite seu nome",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                            borderSide: BorderSide(color: Colors.red)),
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 400.0,
-                    child: TextFormField(
+                          labelText: "Digite seu e-mail",
+                          labelStyle: const TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(14.0),
+                              borderSide: const BorderSide(
+                                color: Colors.red,
+                              )),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(14.0),
+                              borderSide: const BorderSide(color: Colors.red)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(14.0),
+                              borderSide: const BorderSide(color: Colors.red))),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    //Campo de CPF
+                    TextFormField(
                       decoration: InputDecoration(
                         labelText: "Digite seu CPF",
+                        labelStyle: const TextStyle(color: Colors.white),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                        ),
+                            borderRadius: BorderRadius.circular(14.0),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                            )),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
-                            borderSide: BorderSide(color: Colors.red)),
+                            borderRadius: BorderRadius.circular(14.0),
+                            borderSide: const BorderSide(color: Colors.red)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14.0),
+                            borderSide: const BorderSide(color: Colors.red)),
                       ),
-                    )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                        side: BorderSide(color: Colors.red))),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.red)),
-                            onPressed: () {},
-                            child: Text(
-                              'Entrar',
-                              style: TextStyle(fontSize: 20.0),
-                            ))),
+                      keyboardType: TextInputType.number,
+                    ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              //Botoes entrar e cadastrar-se
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
-                    Expanded(
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                        side: BorderSide(color: Colors.red))),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.red)),
-                            onPressed: () {},
-                            child: Text(
-                              'Cadastrar-se',
-                              style: TextStyle(fontSize: 20.0),
-                            ))),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: ElevatedButton(
+                                onPressed: () {}, child: const Text("Entrar"))),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text("Cadastrar-se"))),
+                      ],
+                    ),
                   ],
-                )
-              ],
-            ))
-          ],
-        ));
+                ),
+              )
+            ],
+          ),
+        ),
+      )),
+    );
   }
 }
