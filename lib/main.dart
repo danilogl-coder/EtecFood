@@ -6,4 +6,5 @@ import 'package:flutter_modular/flutter_modular.dart'; //<- importei a bibliotec
 void main() {
   //<- Estou rodando RunApp com ModularApp
   runApp(ModularApp(module: AppModule(), child: const Root()));
+  //texte
 }
