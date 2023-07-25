@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                   )
                 ],
               ),
-              //Campo de E-mail e Cpf
+              //Campo de Nome e  E-mail
               Container(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                     //Campo de E-mail
                     TextFormField(
                       decoration: InputDecoration(
-                          labelText: "Digite seu e-mail",
+                          labelText: "Digite seu Nome",
                           labelStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14.0),
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14.0),
                               borderSide: const BorderSide(color: Colors.red))),
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.name,
                     ),
                     const SizedBox(
                       height: 10.0,
@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                     //Campo de CPF
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Digite seu CPF",
+                        labelText: "Digite seu E-mail",
                         labelStyle: const TextStyle(color: Colors.white),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14.0),
@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14.0),
                             borderSide: const BorderSide(color: Colors.red)),
                       ),
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ],
                 ),
@@ -97,13 +97,21 @@ class LoginPage extends StatelessWidget {
                       children: [
                         Expanded(
                             child: ElevatedButton(
-                                onPressed: () {}, child: const Text("Entrar"))),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red),
+                                onPressed: () {},
+                                child: const Text("Entrar"))),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 5.0,
                     ),
                     Row(
                       children: [
                         Expanded(
                             child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red),
                                 onPressed: () {},
                                 child: const Text("Cadastrar-se"))),
                       ],
