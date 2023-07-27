@@ -9,6 +9,7 @@ class Root extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: "EtecFood",
+      //Themas
       theme: ThemeData.dark(),
       routeInformationParser: Modular
           .routeInformationParser, //passei o paramtetro padrão disponível da biblioteca flutter_modular

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -112,7 +113,9 @@ class LoginPage extends StatelessWidget {
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.red),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Modular.to.navigate('/RegisterPage');
+                                },
                                 child: const Text("Cadastrar-se"))),
                       ],
                     ),
