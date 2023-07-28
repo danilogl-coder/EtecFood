@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  //Declarando chave global do formulario
+  final _keyRegisterForm = GlobalKey<FormState>();
+  //Controlador
+  TextEditingController _controllerCpf = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +30,7 @@ class RegisterPage extends StatelessWidget {
           child:
               //Formulario
               Form(
+            key: _keyRegisterForm,
             child: Column(
               children: [
                 //Campo de Nome, E-mail, Senha, Cpf, Número, Foto
@@ -47,6 +57,12 @@ class RegisterPage extends StatelessWidget {
                                 borderSide:
                                     const BorderSide(color: Colors.red))),
                         keyboardType: TextInputType.name,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return "Por favor digite seu nome";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 15.0,
@@ -69,6 +85,15 @@ class RegisterPage extends StatelessWidget {
                               borderSide: const BorderSide(color: Colors.red)),
                         ),
                         keyboardType: TextInputType.emailAddress,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return "Por favor digite seu E-mail";
+                          }
+                          if (!text.contains("@")) {
+                            return "Por digite um e-mail valido com @";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 15.0,
@@ -90,7 +115,15 @@ class RegisterPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14.0),
                               borderSide: const BorderSide(color: Colors.red)),
                         ),
+                        obscureText: true,
+                        obscuringCharacter: "*",
                         keyboardType: TextInputType.text,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return "Por favor digite uma senha";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 15.0,
@@ -112,6 +145,14 @@ class RegisterPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14.0),
                               borderSide: const BorderSide(color: Colors.red)),
                         ),
+                        obscureText: true,
+                        obscuringCharacter: "*",
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return "Por favor repita sua senha";
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.text,
                       ),
                       const SizedBox(
@@ -135,12 +176,19 @@ class RegisterPage extends StatelessWidget {
                               borderSide: const BorderSide(color: Colors.red)),
                         ),
                         keyboardType: TextInputType.phone,
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return "Por favor digite o número de telefone";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 15.0,
                       ),
                       //Campo Cpf
                       TextFormField(
+                        controller: _controllerCpf,
                         decoration: InputDecoration(
                           labelText: "Digite seu CPF",
                           labelStyle: const TextStyle(color: Colors.white),
@@ -156,7 +204,21 @@ class RegisterPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14.0),
                               borderSide: const BorderSide(color: Colors.red)),
                         ),
+                        maxLength: 14,
                         keyboardType: TextInputType.number,
+                        //Formatação do Cpf -- Inicio
+
+                        //Formatação do CPf -- Fim
+                        //Validador
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return "Por favor digite seu CPF";
+                          }
+                          if (text.length != 11) {
+                            return "CPF Invalido";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 15.0,
@@ -178,7 +240,14 @@ class RegisterPage extends StatelessWidget {
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_keyRegisterForm.currentState!.validate()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Processing Data')),
+                                );
+                              }
+                            },
                             child: const Text(
                               "Enviar",
                               style: TextStyle(fontSize: 22.0),
