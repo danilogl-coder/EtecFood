@@ -11,7 +11,7 @@ class _RegisterPageState extends State<RegisterPage> {
   //Declarando chave global do formulario
   final _keyRegisterForm = GlobalKey<FormState>();
   //Controlador
-  TextEditingController _controllerCpf = TextEditingController();
+  final TextEditingController _controllerCpf = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
