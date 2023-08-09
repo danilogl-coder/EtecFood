@@ -7,16 +7,14 @@ import 'package:flutter_modular/flutter_modular.dart'; //<- Importei o flutter_m
 class PageManager extends Module {
   //Injeções de dependencia.
   @override
-  List<Bind> get binds => [
-    
-  ];
+  void binds(i){}
 
   //Rotas
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const BaseScreen()),
-        ChildRoute("/RegisterPage", child: (context, args) => const RegisterPage()),
-        ChildRoute("/LoginPage", child: ((context, args) => const LoginPage()))
-
-      ];
+  void routes(r)
+  {
+    r.child('/', child: (context) => const BaseScreen());
+    r.child("/RegisterPage", child: (context) => const RegisterPage());
+    r.child("/LoginPage", child: (context) => const LoginPage());
+  }
 }

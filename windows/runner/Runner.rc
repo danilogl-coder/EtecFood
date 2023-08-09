@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
+            VALUE "CompanyName", "br.com.guilherme" "\0"
             VALUE "FileDescription", "etecfood" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "etecfood" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 br.com.guilherme. All rights reserved." "\0"
             VALUE "OriginalFilename", "etecfood.exe" "\0"
             VALUE "ProductName", "etecfood" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
