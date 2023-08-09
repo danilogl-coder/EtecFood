@@ -1,6 +1,6 @@
 import 'package:etecfood/screen/base/base_screen.dart';
 import 'package:etecfood/screen/user/login_page.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart'; //<- Importei o flutter_modular
 
  import '../screen/user/register_page.dart';
 

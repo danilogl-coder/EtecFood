@@ -5,6 +5,6 @@ import 'package:flutter/material.dart'; //<- importei material dart.
 import 'package:flutter_modular/flutter_modular.dart'; //<- importei a biblioteca flutter_modular.
 
 void main() {
-  //<- Estou rodando RunApp com ModularApp
+  //<- Estou rodando RunApp com PageManager(Gerenciador de paginas)
   runApp(ModularApp(module: PageManager(), child: const Root()));
 }

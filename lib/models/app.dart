@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:flutter_modular/flutter_modular.dart";
+import "package:flutter_modular/flutter_modular.dart"; //<- importei o flutter modular
 
 class Root extends StatelessWidget {
   const Root({super.key});
@@ -17,10 +17,8 @@ class Root extends StatelessWidget {
         textTheme: const TextTheme(displayLarge: TextStyle( color: Colors.white)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routeInformationParser: Modular
-          .routeInformationParser, //passei o paramtetro padrão disponível da biblioteca flutter_modular
-      routerDelegate: Modular
-          .routerDelegate, //passei o paramtetro padrão disponível da biblioteca flutter_modular
+      routeInformationParser: Modular.routeInformationParser, //passei o paramtetro padrão disponível da biblioteca flutter_modular
+      routerDelegate: Modular.routerDelegate, //passei o paramtetro padrão disponível da biblioteca flutter_modular
     );
   }
 }
