@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "819291624437",
+    "project_id": "etecfood-etf",
+    "storage_bucket": "etecfood-etf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819291624437:android:197dd521123578320846bc",
+        "android_client_info": {
+          "package_name": "br.com.guilherme.etecfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819291624437-votbsugcapr21vracmfiulneakpk76gq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIH4EhBk1rshmc3Q56KpfkdYJ5096JsB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819291624437-votbsugcapr21vracmfiulneakpk76gq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819291624437-se2s3ssoebep6ps4ustfmpjvglkl8jco.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.guilherme.etecfood"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
