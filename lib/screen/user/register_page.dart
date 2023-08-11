@@ -16,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       //Configurações de cores
-      backgroundColor: const Color.fromRGBO(37, 39, 62, 1.0),
+      backgroundColor: const Color.fromRGBO(36, 38, 62, 1.0),
       //AppBar e configuração de cor da Appbar
       appBar: AppBar(
         title: const Text("Cadastrar-se"),

@@ -1,7 +1,7 @@
 
 import 'package:etecfood/models/app.dart';  //<- Importei app(MaterialApp)
 import 'package:etecfood/models/page_manager.dart'; //<- importei o page_manager(gerenciador de paginas.)
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart'; //<- importei o plugin principal do firebase
 import 'package:flutter/material.dart'; //<- importei material dart.
 import 'package:flutter_modular/flutter_modular.dart';
 

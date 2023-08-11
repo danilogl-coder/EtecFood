@@ -13,8 +13,8 @@ class PageManager extends Module {
   @override
   void routes(r)
   {
-    r.child('/', child: (context) => const BaseScreen());
+    r.child('/', child: (context) => LoginPage());
     r.child("/RegisterPage", child: (context) => const RegisterPage());
-    r.child("/LoginPage", child: (context) => const LoginPage());
+    r.child("/BaseScreen", child: (context) => const BaseScreen());
   }
 }

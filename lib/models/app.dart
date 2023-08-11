@@ -11,7 +11,7 @@ class Root extends StatelessWidget {
       title: "EtecFood",
       //Tema do aplicativo
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color.fromRGBO(37, 39, 62, 1.0)),
+        appBarTheme: const AppBarTheme(color: Color.fromRGBO(36, 38, 62, 1.0)),
         drawerTheme: const DrawerThemeData(backgroundColor: Color.fromRGBO(37, 39, 62, 1.0)),
         scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 37),
         textTheme: const TextTheme(displayLarge: TextStyle( color: Colors.white)),
