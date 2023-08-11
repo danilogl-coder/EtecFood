@@ -1,3 +1,4 @@
+import 'package:etecfood/helpers/validators_email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -62,6 +63,16 @@ class LoginPage extends StatelessWidget {
                                     label: 'Digite seu E-mail',
                                     customColor: Colors.black),
                             keyboardType: TextInputType.emailAddress,
+                            autocorrect: false,
+                            validator: (value){
+                              if(!emailValid(value))
+                              {
+                                return 'E-mail invalido';
+                              } else 
+                              {
+                                return null;
+                              }
+                            },
                           ),
                           //Espaçamento
                           const SizedBox(
@@ -73,7 +84,17 @@ class LoginPage extends StatelessWidget {
                                 CustomInputDecoration.setCustomInputDecoration(
                                     label: 'Digite sua Senha',
                                     customColor: Colors.black),
-                            keyboardType: TextInputType.text,
+                                    obscureText: true,
+                                    validator: (value){
+                                      if(value!.isEmpty || value.length < 6)
+                                      {
+                                        return 'Senha invalida';
+                                      } else 
+                                      {
+                                        return null;
+                                      }
+                                    },
+                                    keyboardType: TextInputType.text,
                           ),
                           //Espaçamento
                           const SizedBox(
@@ -86,7 +107,9 @@ class LoginPage extends StatelessWidget {
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.red),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      formKey.currentState!.validate();
+                                    },
                                     child: const Text("Entrar")),
                               ),
                             ],
