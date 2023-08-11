@@ -8,7 +8,7 @@ class CustomTextFieldBorder extends StatelessWidget {
 
   TextStyle colors()
   {
-    return TextStyle(color: color);
+    return TextStyle();
   }
 
   @override
