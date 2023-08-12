@@ -1,3 +1,4 @@
+import 'package:etecfood/models/user_manager.dart';
 import 'package:etecfood/screen/base/base_screen.dart';
 import 'package:etecfood/screen/user/login_page.dart';
 import 'package:flutter_modular/flutter_modular.dart'; //<- Importei o flutter_modular
@@ -7,7 +8,9 @@ import 'package:flutter_modular/flutter_modular.dart'; //<- Importei o flutter_m
 class PageManager extends Module {
   //Injeções de dependencia.
   @override
-  void binds(i){}
+  void binds(i){
+    i.add(UserManager.new);
+  }
 
   //Rotas
   @override

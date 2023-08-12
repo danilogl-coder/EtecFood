@@ -1,4 +1,6 @@
 import 'package:etecfood/helpers/validators_email.dart';
+import 'package:etecfood/models/user_manager.dart';
+import 'package:etecfood/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -8,6 +10,8 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +62,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           //Digite seu E-mail
                           TextFormField(
+                            controller: emailController,
                             decoration:
                                 CustomInputDecoration.setCustomInputDecoration(
                                     label: 'Digite seu E-mail',
@@ -80,6 +85,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           //Digite sua senha
                           TextFormField(
+                            controller: passwordController,
                             decoration:
                                 CustomInputDecoration.setCustomInputDecoration(
                                     label: 'Digite sua Senha',
@@ -108,7 +114,23 @@ class LoginPage extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.red),
                                     onPressed: () {
-                                      formKey.currentState!.validate();
+                                      if(formKey.currentState!.validate())
+                                      {
+                                        Modular.get<UserManager>().signIn(user:
+                                        UserModel(
+                                          email: emailController.text, 
+                                          password: passwordController.text),
+                                          onFail: (e){
+                                            ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text('Falha ao Entrar: $e'),
+                                          backgroundColor: Colors.red,
+                                        ));
+                                          }, onSuccess: (){
+                                            debugPrint('sucessos');
+                                            //TODO: FECHAR TELA DE LOGIN
+                                          });
+                                      }
                                     },
                                     child: const Text("Entrar")),
                               ),
