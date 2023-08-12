@@ -6,10 +6,21 @@ import '../helpers/firebase_errors.dart';
 
 class UserManager extends ChangeNotifier
 {
+  UserManager()
+  {
+    _loadCurrentUser();
+  }
+  
   final FirebaseAuth  auth = FirebaseAuth.instance;
+
   User? currentUser;
 
+  bool _loading = false;
+
+  bool get loading => _loading;
+
   Future signIn({required UserModel user, required Function onFail, required Function onSuccess}) async {
+    loading = true;
     try 
     {
        final UserCredential result = await auth.signInWithEmailAndPassword(email: user.email!, password: user.password!);
@@ -19,10 +30,16 @@ class UserManager extends ChangeNotifier
     {
       onFail(getErrorString(e.code));
     }
-   
+    loading = false;
   }
 
-  Future<void> loadCurrentUser() async
+  set loading(bool value) 
+  {
+    _loading = value;
+    notifyListeners();
+  }
+
+  Future<void> _loadCurrentUser() async
   {
     auth.authStateChanges().listen((User? user) {
       if(user != null)
