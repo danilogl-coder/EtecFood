@@ -9,7 +9,7 @@ class PageManager extends Module {
   //Injeções de dependencia.
   @override
   void binds(i){
-    i.add(UserManager.new);
+    i.addSingleton(UserManager.new,);
   }
 
   //Rotas

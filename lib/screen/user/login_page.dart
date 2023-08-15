@@ -15,6 +15,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var loadingNotifier = context.watch<UserManager>();
+    print(loadingNotifier.loading);
     return Scaffold(
       //Safe Area e Container
       body: Container(
@@ -113,7 +116,7 @@ class LoginPage extends StatelessWidget {
                                 child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.red),
-                                    onPressed: () {
+                                    onPressed: loadingNotifier.loading ? null : () {
                                       if(formKey.currentState!.validate())
                                       {
                                         Modular.get<UserManager>().signIn(user:
@@ -132,7 +135,9 @@ class LoginPage extends StatelessWidget {
                                           });
                                       }
                                     },
-                                    child: const Text("Entrar")),
+                                    child: loadingNotifier.loading ? const CircularProgressIndicator(
+                                    valueColor:AlwaysStoppedAnimation(Colors.white),) :
+                                    const Text("Entrar")),
                               ),
                             ],
                           ),
