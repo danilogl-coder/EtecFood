@@ -4,8 +4,9 @@ import 'package:etecfood/screen/login/login_controller.dart';
 import 'package:etecfood/screen/login/login_cubit.dart';
 import 'package:etecfood/screen/login/login_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../commom_components/custom_inputdecoration.dart';
 
@@ -18,7 +19,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //(loadingNotifier.loading);
     return Scaffold(
       //Safe Area e Container
       body: Container(
@@ -119,6 +119,9 @@ class LoginPage extends StatelessWidget {
                                           : () {
                                               if (formKey.currentState!
                                                   .validate()) {
+                                                BlocProvider.of<LoginCubit>(
+                                                        context)
+                                                    .setLoading(true);
                                                 Modular.get<LoginController>()
                                                     .autenticar(
                                                         user: UserModel(
@@ -129,6 +132,11 @@ class LoginPage extends StatelessWidget {
                                                                 passwordController
                                                                     .text),
                                                         onFail: (e) {
+                                                          BlocProvider.of<
+                                                                      LoginCubit>(
+                                                                  context)
+                                                              .setLoading(
+                                                                  false);
                                                           ScaffoldMessenger.of(
                                                                   context)
                                                               .showSnackBar(
@@ -140,6 +148,11 @@ class LoginPage extends StatelessWidget {
                                                           ));
                                                         },
                                                         onSuccess: () {
+                                                          BlocProvider.of<
+                                                                      LoginCubit>(
+                                                                  context)
+                                                              .setLoading(
+                                                                  false);
                                                           debugPrint(
                                                               'sucessos');
                                                           //TODO: FECHAR TELA DE LOGIN
@@ -168,7 +181,7 @@ class LoginPage extends StatelessWidget {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.red),
                                         onPressed: () {
-                                          Modular.to.navigate('/RegisterPage');
+                                          // Modular.to.navigate('/RegisterPage');
                                         },
                                         child: const Text("Cadastrar-se"))),
                               ],

@@ -15,10 +15,12 @@ class LoginController {
       required Function onFail,
       required Function onSuccess}) async {
     try {
+      loginCubit.setLoading(true);
       await helper.signIn(email: user.email, senha: user.password);
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
+    loginCubit.setLoading(false);
   }
 }
