@@ -67,6 +67,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             //Digite seu E-mail
                             TextFormField(
+                              enabled: state.loading ? false : true,
                               controller: emailController,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
@@ -88,6 +89,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             //Digite sua senha
                             TextFormField(
+                              enabled: state.loading ? false : true,
                               controller: passwordController,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
