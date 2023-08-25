@@ -183,7 +183,7 @@ class LoginPage extends StatelessWidget {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.red),
                                         onPressed: () {
-                                          // Modular.to.navigate('/RegisterPage');
+                                          Modular.to.pushNamed('/RegisterPage');
                                         },
                                         child: const Text("Cadastrar-se"))),
                               ],

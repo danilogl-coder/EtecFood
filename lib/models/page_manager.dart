@@ -12,8 +12,9 @@ class PageManager extends Module {
   //Rotas
   @override
   void routes(r) {
-    r.module('/', module: LoginModule());
-    r.child("/RegisterPage", child: (context) => const RegisterPage());
+    //r.module('/', module: LoginModule());
+    r.child("/", child: (context) =>  RegisterPage());
+    r.child("/RegisterPage", child: (context) => RegisterPage());
     r.child("/BaseScreen", child: (context) => const BaseScreen());
   }
 }
