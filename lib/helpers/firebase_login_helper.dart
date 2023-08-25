@@ -11,4 +11,13 @@ class FirebaseLoginHelper {
         await auth.signInWithEmailAndPassword(email: email, password: senha);
     autenticado = UserModel(id: result.user!.uid);
   }
-}
+
+  Future<void> signUp({email, senha}) async {
+    
+      final UserCredential result = await auth.createUserWithEmailAndPassword(
+          email: email, password: senha);
+    }
+    
+  }
+
+

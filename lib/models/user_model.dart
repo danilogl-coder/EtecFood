@@ -4,15 +4,17 @@ class UserModel {
       this.name,
       this.email,
       this.password,
+      this.confirmPassword,
       this.phoneNumber,
       this.cpf,
       this.photograph});
 
-  final String? id;
-  final String? name;
-  final String? email;
-  final String? password;
-  final String? phoneNumber;
-  final String? cpf;
-  final String? photograph;
+  String? id;
+  String? name;
+  String? email;
+  String? password;
+  String? confirmPassword;
+  String? phoneNumber;
+  String? cpf;
+  String? photograph;
 }
