@@ -179,7 +179,8 @@ class LoginPage extends StatelessWidget {
                                                                   false);
                                                           debugPrint(
                                                               'sucessos');
-                                                          //TODO: FECHAR TELA DE LOGIN
+                                                          Modular.to.pushNamed(
+                                                              '/BaseScreen');
                                                         });
                                               }
                                             },
