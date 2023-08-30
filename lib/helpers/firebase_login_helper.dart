@@ -14,6 +14,7 @@ class FirebaseLoginHelper {
 
   Future<void> signUp({email, senha}) async {
     
+      // ignore: unused_local_variable
       final UserCredential result = await auth.createUserWithEmailAndPassword(
           email: email, password: senha);
     }

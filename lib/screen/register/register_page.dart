@@ -11,6 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../commom_components/custom_inputdecoration.dart';
 import '../../models/user_model.dart';
 
+// ignore: must_be_immutable
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
@@ -21,6 +22,8 @@ class RegisterPage extends StatelessWidget {
 
   //Controlador
   final TextEditingController _controllerCpf = TextEditingController();
+
+  bool visibility = false;
 
   @override
   Widget build(BuildContext context) {
@@ -103,11 +106,28 @@ class RegisterPage extends StatelessWidget {
                                                     //Campo de Senha
                                                     TextFormField(
                               enabled: state.loading ? false : true,
-                              decoration: CustomInputDecoration
-                                      .setCustomInputDecoration(
-                                          label: 'Digite sua Senha',
-                                          customColor: Colors.black),
-                              obscureText: true,
+                              decoration: InputDecoration(
+                                suffixIconColor: Colors.black,
+                                suffixIcon: GestureDetector(
+                                  onTap: (){
+                                    BlocProvider.of<RegisterCubit>(context).setVisibility();
+                                  },
+                                  child: state.visibility ?  const Icon(Icons.visibility) : const Icon(Icons.visibility_off)) ,
+                                labelText: 'Senha',
+                                labelStyle: const TextStyle(color: Colors.grey),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    borderSide: const BorderSide(
+                                      color:Colors.black,
+                                    )),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    borderSide: const BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    borderSide: const BorderSide(color: Colors.black))
+                              ),
+                              obscureText: !state.visibility,
                               obscuringCharacter: "*",
                               keyboardType: TextInputType.text,
                               validator: (pass) {
@@ -131,7 +151,7 @@ class RegisterPage extends StatelessWidget {
                                       .setCustomInputDecoration(
                                           label: 'Repita sua senha',
                                           customColor: Colors.black),
-                              obscureText: true,
+                              obscureText: !state.visibility,
                               obscuringCharacter: "*",
                               validator: (pass) {
                                  if (pass!.isEmpty) {
@@ -233,7 +253,7 @@ class RegisterPage extends StatelessWidget {
                                     }
                                      
                                   },
-                                  child: state.loading? const CircularProgressIndicator(
+                                  child: state.loading ? const CircularProgressIndicator(
                                               valueColor:
                                                   AlwaysStoppedAnimation(
                                                       Colors.white),

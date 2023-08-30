@@ -13,14 +13,14 @@ class LoginModule extends Module {
     i.addLazySingleton<LoginCubit>(LoginCubit.new);
     i.addInstance<LoginController>(LoginController(
         helper: FirebaseLoginHelper(),
-        loginCubit: LoginCubit(LoginState(loading: false))));
+        loginCubit: LoginCubit(LoginState(loading: false, visibility: true))));
   }
 
   @override
   void routes(r) {
     r.child('/',
         child: ((context) => BlocProvider(
-              create: (_) => LoginCubit(LoginState(loading: false)),
+              create: (_) => LoginCubit(LoginState(loading: false, visibility: false)),
               child: LoginPage(),
             )));
   }

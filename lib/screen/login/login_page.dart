@@ -91,11 +91,28 @@ class LoginPage extends StatelessWidget {
                             TextFormField(
                               enabled: state.loading ? false : true,
                               controller: passwordController,
-                              decoration: CustomInputDecoration
-                                  .setCustomInputDecoration(
-                                      label: 'Digite sua Senha',
-                                      customColor: Colors.black),
-                              obscureText: true,
+                              decoration: InputDecoration(
+                                suffixIconColor: Colors.grey,
+                                suffixIcon: GestureDetector(
+                                  onTap: (){
+                                    BlocProvider.of<LoginCubit>(context).setVisibility();
+                                  },
+                                  child: state.visibility ?  const Icon(Icons.visibility) : const Icon(Icons.visibility_off)) ,
+                                labelText: 'Senha',
+                                labelStyle: const TextStyle(color: Colors.black),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    borderSide: const BorderSide(
+                                      color:Colors.black,
+                                    )),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    borderSide: const BorderSide(color: Colors.black)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14.0),
+                                    borderSide: const BorderSide(color: Colors.black))
+                              ),
+                              obscureText: !state.visibility,
                               validator: (value) {
                                 if (value!.isEmpty || value.length < 6) {
                                   return 'Senha invalida';

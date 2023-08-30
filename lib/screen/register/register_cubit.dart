@@ -5,6 +5,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(RegisterState initialState) : super(initialState);
 
   void setLoading(bool value) {
-    emit(RegisterState(loading: value));
+    emit(RegisterState(loading: value, visibility: state.visibility));
+  }
+
+  void setVisibility()
+  {
+    emit(RegisterState(visibility: !state.visibility, loading: state.loading));
   }
 }

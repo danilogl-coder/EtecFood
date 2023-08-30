@@ -14,14 +14,14 @@ class RegisterModule extends Module {
     i.addLazySingleton<RegisterCubit>(RegisterCubit.new);
     i.addInstance<RegisterController>(RegisterController(
         helper: FirebaseLoginHelper(),
-        registerCubit: RegisterCubit(RegisterState(loading: false))));
+        registerCubit: RegisterCubit(RegisterState(loading: false, visibility: true))));
   }
 
   @override
   void routes(r) {
-    r.child("/",
+    r.child("/register",
         child: ((context) => BlocProvider(
-              create: (_) => RegisterCubit(RegisterState(loading: false)),
+              create: (_) => RegisterCubit(RegisterState(loading: false, visibility: false)),
               child: RegisterPage(),
             )));
   }
