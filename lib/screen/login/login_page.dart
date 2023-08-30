@@ -92,26 +92,31 @@ class LoginPage extends StatelessWidget {
                               enabled: state.loading ? false : true,
                               controller: passwordController,
                               decoration: InputDecoration(
-                                suffixIconColor: Colors.grey,
-                                suffixIcon: GestureDetector(
-                                  onTap: (){
-                                    BlocProvider.of<LoginCubit>(context).setVisibility();
-                                  },
-                                  child: state.visibility ?  const Icon(Icons.visibility) : const Icon(Icons.visibility_off)) ,
-                                labelText: 'Senha',
-                                labelStyle: const TextStyle(color: Colors.black),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(14.0),
-                                    borderSide: const BorderSide(
-                                      color:Colors.black,
-                                    )),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(14.0),
-                                    borderSide: const BorderSide(color: Colors.black)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(14.0),
-                                    borderSide: const BorderSide(color: Colors.black))
-                              ),
+                                  suffixIconColor: Colors.grey,
+                                  suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        BlocProvider.of<LoginCubit>(context)
+                                            .setVisibility();
+                                      },
+                                      child: state.visibility
+                                          ? const Icon(Icons.visibility)
+                                          : const Icon(Icons.visibility_off)),
+                                  labelText: 'Senha',
+                                  labelStyle:
+                                      const TextStyle(color: Colors.black),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(14.0),
+                                      borderSide: const BorderSide(
+                                        color: Colors.black,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(14.0),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(14.0),
+                                      borderSide: const BorderSide(
+                                          color: Colors.black))),
                               obscureText: !state.visibility,
                               validator: (value) {
                                 if (value!.isEmpty || value.length < 6) {
@@ -200,7 +205,8 @@ class LoginPage extends StatelessWidget {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.red),
                                         onPressed: () {
-                                          Modular.to.pushNamed('/RegisterPage');
+                                          Modular.to.pushNamed(
+                                              '/RegisterModule/RegisterPage');
                                         },
                                         child: const Text("Cadastrar-se"))),
                               ],

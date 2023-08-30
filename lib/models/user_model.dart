@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
   UserModel(
       {this.id,
@@ -17,4 +19,20 @@ class UserModel {
   String? phoneNumber;
   String? cpf;
   String? photograph;
+
+  //Função pra salvar os dados
+  DocumentReference get firestoreRef =>
+      FirebaseFirestore.instance.doc('users/$id');
+  Future<void> saveData() async {
+    await firestoreRef.set(toMap());
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'cpf': cpf,
+    };
+  }
 }
