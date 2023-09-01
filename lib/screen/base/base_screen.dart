@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../commom_components/custom_drawer.dart';
+import 'custom_drawer.dart';
 
 class BaseScreen extends StatelessWidget 
 {

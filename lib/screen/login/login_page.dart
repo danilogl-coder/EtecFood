@@ -180,7 +180,7 @@ class LoginPage extends StatelessWidget {
                                                           debugPrint(
                                                               'sucessos');
                                                           Modular.to.pushNamed(
-                                                              '/BaseScreen');
+                                                              '/');
                                                         });
                                               }
                                             },

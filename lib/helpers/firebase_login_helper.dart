@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/app_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../models/user_model.dart';
 
 class FirebaseLoginHelper {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  
-  UserModel? userModel;
 
   FirebaseLoginHelper() {
     checkCurrentUser();
@@ -29,6 +28,13 @@ class FirebaseLoginHelper {
     autenticado = UserModel(id: result.user!.uid);
   }
 
+  //Desloga
+  void signOut()
+  {
+    auth.signOut();
+    autenticado = null;
+  }
+
   //Conferindo se o usuario esta logado.
   Future<void> checkCurrentUser() async {
     final user = auth.currentUser;
@@ -38,8 +44,10 @@ class FirebaseLoginHelper {
       //Criei um documento e estou chamando os dados do usuario atravez do id
       final DocumentSnapshot documentUser = 
       await firestore.collection('users').doc(autenticado!.id).get();
-      userModel = UserModel.fromDocument(documentUser);
-      print(userModel!.name);
+      autenticado = UserModel.fromDocument(documentUser);
+      print(autenticado!.name);
+
+      Modular.to.pushNamed('/');
 
     }
   }
