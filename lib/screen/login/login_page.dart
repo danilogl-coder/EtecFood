@@ -14,7 +14,9 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -179,8 +181,8 @@ class LoginPage extends StatelessWidget {
                                                                   false);
                                                           debugPrint(
                                                               'sucessos');
-                                                          Modular.to.pushNamed(
-                                                              '/');
+                                                          Modular.to
+                                                              .pushNamed('/');
                                                         });
                                               }
                                             },

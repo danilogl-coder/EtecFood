@@ -1,12 +1,23 @@
+import "package:etecfood/helpers/firebase_login_helper.dart";
 import "package:flutter/material.dart";
 import "package:flutter_modular/flutter_modular.dart"; //<- importei o flutter modular
 
-class Root extends StatelessWidget {
+class Root extends StatefulWidget {
   const Root({super.key});
 
   @override
+  State<Root> createState() => _RootState();
+}
+
+class _RootState extends State<Root> {
+  @override
+  void initState() {
+    super.initState();
+    Modular.get<FirebaseLoginHelper>().checkCurrentUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: "EtecFood",

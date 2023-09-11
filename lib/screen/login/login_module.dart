@@ -20,7 +20,8 @@ class LoginModule extends Module {
   void routes(r) {
     r.child('/',
         child: ((context) => BlocProvider(
-              create: (_) => LoginCubit(LoginState(loading: false, visibility: false)),
+              create: (_) =>
+                  LoginCubit(LoginState(loading: false, visibility: false)),
               child: LoginPage(),
             )));
   }

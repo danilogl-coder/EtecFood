@@ -18,6 +18,5 @@ class PageManager extends Module {
     r.child("/", child: (context) => const BaseScreen(), guards: [AuthGuard()]);
     r.module('/LoginModule', module: LoginModule());
     r.module("/RegisterModule", module: RegisterModule());
-   
   }
 }
