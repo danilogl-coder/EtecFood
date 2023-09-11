@@ -29,7 +29,7 @@ class FirebaseLoginHelper {
     final UserCredential result = await auth.createUserWithEmailAndPassword(
         email: email, password: senha);
     autenticado = UserModel(id: result.user!.uid);
-    Modular.to.pop();
+    
   }
 
   //Desloga
