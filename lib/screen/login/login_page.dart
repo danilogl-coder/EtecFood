@@ -1,3 +1,4 @@
+import 'package:etecfood/helpers/firebase_login_helper.dart';
 import 'package:etecfood/helpers/validators_email.dart';
 import 'package:etecfood/models/user_model.dart';
 import 'package:etecfood/screen/login/login_controller.dart';
@@ -10,14 +11,25 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../commom_components/custom_inputdecoration.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    Modular.get<FirebaseLoginHelper>().checkCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {

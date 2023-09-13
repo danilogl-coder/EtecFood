@@ -3,6 +3,7 @@ import 'package:etecfood/helpers/validators_email.dart';
 import 'package:etecfood/helpers/validators_phone.dart';
 import 'package:etecfood/screen/register/register_controller.dart';
 import 'package:etecfood/screen/register/register_cubit.dart';
+import 'package:etecfood/screen/register/register_perfilImage.dart';
 import 'package:etecfood/screen/register/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,6 +57,8 @@ class RegisterPage extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Column(
                           children: [
+                            //Campo da Foto
+                            RegisterPerfilImage(),
                             //Campo de Nome
                             TextFormField(
                               enabled: state.loading ? false : true,

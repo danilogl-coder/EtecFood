@@ -1,5 +1,5 @@
 import "package:etecfood/app_store.dart";
-import "package:etecfood/commom_components/toCapitalize.dart";
+import 'package:etecfood/commom_components/toCapitalize.dart';
 import "package:etecfood/helpers/firebase_login_helper.dart";
 import "package:flutter/material.dart";
 import "package:flutter_modular/flutter_modular.dart";

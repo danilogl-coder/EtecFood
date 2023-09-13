@@ -29,7 +29,6 @@ class FirebaseLoginHelper {
     final UserCredential result = await auth.createUserWithEmailAndPassword(
         email: email, password: senha);
     autenticado = UserModel(id: result.user!.uid);
-    
   }
 
   //Desloga
@@ -48,7 +47,7 @@ class FirebaseLoginHelper {
       final DocumentSnapshot documentUser =
           await firestore.collection('users').doc(autenticado!.id).get();
       autenticado = UserModel.fromDocument(documentUser);
-      print(autenticado!.name);
+      //print(autenticado!.name);
 
       Modular.to.pushNamed('/');
     }

@@ -22,7 +22,7 @@ class LoginModule extends Module {
         child: ((context) => BlocProvider(
               create: (_) =>
                   LoginCubit(LoginState(loading: false, visibility: false)),
-              child: LoginPage(),
+              child: const LoginPage(),
             )));
   }
 }

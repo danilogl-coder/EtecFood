@@ -10,17 +10,14 @@ class UserModel {
       this.phoneNumber,
       this.cpf,
       this.photograph});
-  
-  UserModel.fromDocument(DocumentSnapshot documentUser)
-  {
+
+  UserModel.fromDocument(DocumentSnapshot documentUser) {
     id = documentUser.id;
     name = documentUser.get('name');
     email = documentUser.get('email');
     phoneNumber = documentUser.get('phoneNumber');
     cpf = documentUser.get('cpf');
-
   }
-
 
   String? id;
   String? name;
