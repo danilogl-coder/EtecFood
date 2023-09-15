@@ -1,4 +1,5 @@
 import 'package:etecfood/app_store.dart';
+import 'package:etecfood/helpers/firebase_register_helper.dart';
 import 'package:etecfood/screen/register/register_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -7,9 +8,10 @@ import '../../helpers/firebase_login_helper.dart';
 import '../../models/user_model.dart';
 
 class RegisterController {
-  RegisterController({required this.helper, required this.registerCubit});
+  RegisterController({required this.helper, required this.registerCubit, required this.registerHelper});
 
   final FirebaseLoginHelper helper;
+  final FirebaseRegisterHelper registerHelper;
   final RegisterCubit registerCubit;
   UserModel? userModel;
 
@@ -22,9 +24,15 @@ class RegisterController {
       user.id = autenticado!.id;
       userModel = user;
       await userModel!.saveData();
+      await uploadPhoto(userModel!);
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
+  }
+
+  uploadPhoto(UserModel userModel) async
+  {
+    await registerHelper.uploadImage(userModel);
   }
 }

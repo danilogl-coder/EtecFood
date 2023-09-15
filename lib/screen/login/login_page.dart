@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                                           debugPrint(
                                                               'sucessos');
                                                           Modular.to
-                                                              .pushNamed('/');
+                                                              .pushReplacementNamed('/');
                                                         });
                                               }
                                             },

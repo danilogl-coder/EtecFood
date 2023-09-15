@@ -1,3 +1,4 @@
+import 'package:etecfood/helpers/firebase_register_helper.dart';
 import 'package:etecfood/screen/register/register_controller.dart';
 import 'package:etecfood/screen/register/register_cubit.dart';
 import 'package:etecfood/screen/register/register_page.dart';
@@ -14,6 +15,7 @@ class RegisterModule extends Module {
     i.addLazySingleton<RegisterCubit>(RegisterCubit.new);
     i.addInstance<RegisterController>(RegisterController(
         helper: FirebaseLoginHelper(),
+        registerHelper: FirebaseRegisterHelper(),
         registerCubit:
             RegisterCubit(RegisterState(loading: false, visibility: true))));
   }

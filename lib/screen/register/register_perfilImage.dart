@@ -9,17 +9,20 @@ import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class RegisterPerfilImage extends StatelessWidget {
-  RegisterPerfilImage({super.key});
+  final Function(File file) onSave;
+  RegisterPerfilImage({super.key, required this.onSave});
 
   final _imagePicker = ImagePicker();
-  File? file;
+  
 
   Future<void> _pickImage(ImageSource source, BuildContext context) async {
     final pickedFile = await _imagePicker.pickImage(source: source);
     if (pickedFile != null) {
-      file = File(pickedFile.path);
+      var file = File(pickedFile.path);
       // ignore: use_build_context_synchronously
-      context.read<RegisterPerfilImageCubit>().setPerfilImage(file!);
+      context.read<RegisterPerfilImageCubit>().setPerfilImage(file);
+      onSave(file);
+      
     }
   }
 
@@ -27,14 +30,14 @@ class RegisterPerfilImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          RegisterPerfilImageCubit(RegisterPerfilImageState(file: File(''))),
+          RegisterPerfilImageCubit(RegisterPerfilImageState()),
       child: BlocBuilder<RegisterPerfilImageCubit, RegisterPerfilImageState>(
         builder: (context, state) => Column(
           children: [
             CircleAvatar(
               radius: 60.0,
-              backgroundImage: file != null ? FileImage(state.file) : null,
-              child: file != null
+              backgroundImage: state.file != null ? FileImage(state.file!) : null,
+              child: state.file != null
                   ? null
                   : const Icon(
                       Icons.person,

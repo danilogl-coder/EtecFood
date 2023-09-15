@@ -3,7 +3,7 @@
 import 'dart:io';
 
 class RegisterPerfilImageState {
-  RegisterPerfilImageState({required this.file});
+  RegisterPerfilImageState({ this.file});
 
-  File file;
+  File? file;
 }

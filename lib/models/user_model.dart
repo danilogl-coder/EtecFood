@@ -17,6 +17,7 @@ class UserModel {
     email = documentUser.get('email');
     phoneNumber = documentUser.get('phoneNumber');
     cpf = documentUser.get('cpf');
+    photograph = documentUser.get('photograph');
   }
 
   String? id;
@@ -41,6 +42,7 @@ class UserModel {
       'email': email,
       'phoneNumber': phoneNumber,
       'cpf': cpf,
+      'photograph' : photograph,
     };
   }
 }

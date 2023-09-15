@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:etecfood/helpers/validators_cpf.dart';
 import 'package:etecfood/helpers/validators_email.dart';
 import 'package:etecfood/helpers/validators_phone.dart';
@@ -6,6 +7,7 @@ import 'package:etecfood/screen/register/register_cubit.dart';
 import 'package:etecfood/screen/register/register_perfilImage.dart';
 import 'package:etecfood/screen/register/register_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -58,7 +60,7 @@ class RegisterPage extends StatelessWidget {
                         child: Column(
                           children: [
                             //Campo da Foto
-                            RegisterPerfilImage(),
+                            RegisterPerfilImage(onSave: (file) => user.photograph = file.path,),
                             //Campo de Nome
                             TextFormField(
                               enabled: state.loading ? false : true,
@@ -171,6 +173,10 @@ class RegisterPage extends StatelessWidget {
                             ),
                             //Campo Telefone
                             TextFormField(
+                              inputFormatters: [
+                                 FilteringTextInputFormatter.digitsOnly,
+                                 TelefoneInputFormatter(),
+                              ],
                               enabled: state.loading ? false : true,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
@@ -187,13 +193,17 @@ class RegisterPage extends StatelessWidget {
                             ),
                             //Campo Cpf
                             TextFormField(
+                              inputFormatters: [
+                                 FilteringTextInputFormatter.digitsOnly,
+                                 CpfInputFormatter(),
+                              ],
                               controller: _controllerCpf,
                               enabled: state.loading ? false : true,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
                                       label: 'Digite seu CPF',
                                       customColor: Colors.black),
-                              maxLength: 11,
+                              maxLength: 14,
                               keyboardType: TextInputType.number,
                               //Formatação do Cpf -- Inicio
 

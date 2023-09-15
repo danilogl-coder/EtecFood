@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/app_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../models/user_model.dart';
@@ -47,9 +51,29 @@ class FirebaseLoginHelper {
       final DocumentSnapshot documentUser =
           await firestore.collection('users').doc(autenticado!.id).get();
       autenticado = UserModel.fromDocument(documentUser);
+      if(autenticado!.photograph != null){
+      downloadPhoto(autenticado!.photograph);
+      }
       //print(autenticado!.name);
 
       Modular.to.pushNamed('/');
     }
+  }
+  
+  Future<void> downloadPhoto(photograph) async {
+// Create a storage reference from our app
+final storageRef = FirebaseStorage.instance.ref();
+
+// Create a reference with an initial file path and name
+final pathReference = storageRef.child("users/$photograph.jpg");
+
+final List<int> data = await pathReference.getData() as List<int>;
+
+
+File file = File("$photograph.jpg");
+await file.open(mode: FileMode.write);
+file.writeAsBytes(data);
+
+
   }
 }
