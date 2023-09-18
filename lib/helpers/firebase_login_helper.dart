@@ -51,29 +51,26 @@ class FirebaseLoginHelper {
       final DocumentSnapshot documentUser =
           await firestore.collection('users').doc(autenticado!.id).get();
       autenticado = UserModel.fromDocument(documentUser);
-      if(autenticado!.photograph != null){
-      downloadPhoto(autenticado!.photograph);
+      if (autenticado!.photograph != null) {
+        downloadPhoto(autenticado!.photograph);
       }
       //print(autenticado!.name);
 
       Modular.to.pushNamed('/');
     }
   }
-  
+
   Future<void> downloadPhoto(photograph) async {
 // Create a storage reference from our app
-final storageRef = FirebaseStorage.instance.ref();
+    final storageRef = FirebaseStorage.instance.ref();
 
 // Create a reference with an initial file path and name
-final pathReference = storageRef.child("users/$photograph.jpg");
+    final pathReference = storageRef.child("users/$photograph.jpg");
 
-final List<int> data = await pathReference.getData() as List<int>;
+    final List<int> data = await pathReference.getData() as List<int>;
 
-
-File file = File("$photograph.jpg");
-await file.open(mode: FileMode.write);
-file.writeAsBytes(data);
-
-
+    File file = File("$photograph.jpg");
+    await file.open(mode: FileMode.write);
+    file.writeAsBytes(data);
   }
 }

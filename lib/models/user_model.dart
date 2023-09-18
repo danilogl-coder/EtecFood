@@ -42,7 +42,7 @@ class UserModel {
       'email': email,
       'phoneNumber': phoneNumber,
       'cpf': cpf,
-      'photograph' : photograph,
+      'photograph': photograph,
     };
   }
 }

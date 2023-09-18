@@ -8,7 +8,10 @@ import '../../helpers/firebase_login_helper.dart';
 import '../../models/user_model.dart';
 
 class RegisterController {
-  RegisterController({required this.helper, required this.registerCubit, required this.registerHelper});
+  RegisterController(
+      {required this.helper,
+      required this.registerCubit,
+      required this.registerHelper});
 
   final FirebaseLoginHelper helper;
   final FirebaseRegisterHelper registerHelper;
@@ -24,15 +27,17 @@ class RegisterController {
       user.id = autenticado!.id;
       userModel = user;
       await userModel!.saveData();
-      await uploadPhoto(userModel!);
+      if (userModel!.photograph != null) {
+        await uploadPhoto(userModel!);
+      }
+
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
   }
 
-  uploadPhoto(UserModel userModel) async
-  {
+  uploadPhoto(UserModel userModel) async {
     await registerHelper.uploadImage(userModel);
   }
 }
