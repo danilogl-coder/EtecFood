@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/app_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,14 +25,6 @@ class FirebaseLoginHelper {
     autenticado = UserModel.fromDocument(documentUser);
   }
 
-  //Cadastro
-  Future<void> signUp({email, senha}) async {
-    // ignore: unused_local_variable
-    final UserCredential result = await auth.createUserWithEmailAndPassword(
-        email: email, password: senha);
-    autenticado = UserModel(id: result.user!.uid);
-  }
-
   //Desloga
   Future<void> signOut() async {
     await auth.signOut();
@@ -52,7 +42,7 @@ class FirebaseLoginHelper {
           await firestore.collection('users').doc(autenticado!.id).get();
       autenticado = UserModel.fromDocument(documentUser);
       if (autenticado!.photograph != null) {
-        downloadPhoto(autenticado!.photograph);
+        //downloadPhoto(autenticado!.photograph);
       }
       //print(autenticado!.name);
 

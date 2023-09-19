@@ -14,7 +14,6 @@ class RegisterModule extends Module {
     i.addLazySingleton<FirebaseLoginHelper>(FirebaseLoginHelper.new);
     i.addLazySingleton<RegisterCubit>(RegisterCubit.new);
     i.addInstance<RegisterController>(RegisterController(
-        helper: FirebaseLoginHelper(),
         registerHelper: FirebaseRegisterHelper(),
         registerCubit:
             RegisterCubit(RegisterState(loading: false, visibility: true))));
