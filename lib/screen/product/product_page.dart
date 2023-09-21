@@ -1,5 +1,6 @@
 import 'package:etecfood/screen/base/drawer/custom_drawer.dart';
 import 'package:etecfood/screen/product/components/product_list_tile.dart';
+import 'package:etecfood/screen/product/components/serach_dialog.dart';
 import 'package:etecfood/screen/product/product_cubit.dart';
 import 'package:etecfood/screen/product/product_state.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,18 @@ class _ProductPageState extends State<ProductPage> {
       appBar: AppBar(
         title: const Text('Produtos'),
         centerTitle: true,
+        actions: [
+        IconButton(onPressed: () async{
+          final search = await showDialog<String>(
+                          context: context,
+                          builder: (_) =>
+                              SearchDialog());
+          if(search != null)
+          {
+            return;
+          }
+        }, icon: const Icon(Icons.search))
+        ],
       ),
       body: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) => ListView.builder(
