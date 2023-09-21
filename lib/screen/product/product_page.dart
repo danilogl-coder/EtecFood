@@ -20,7 +20,34 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        title: const Text('Produtos'),
+        title: BlocBuilder<ProductCubit,ProductState>(builder: (context, state) {
+        if(state.search == null)
+        {
+          return const Text('Produtos');
+        } else 
+        {
+          return LayoutBuilder(builder: (context, constraint){
+            return GestureDetector(
+              onTap: () async {
+                 final search = await showDialog<String>(
+                        context: context,
+                        builder: (_) => SearchDialog(
+                              initialText: state.search,
+                            ));
+                            if(search != null)
+                            {
+                              // ignore: use_build_context_synchronously
+                              context.read<ProductCubit>().setSearch(search);
+                            }
+              },
+              child: Container(
+                width: constraint.biggest.width,
+                child: Text(state.search!, textAlign: TextAlign.center,),
+              ),
+            );
+          });
+        }
+        },),
         centerTitle: true,
         actions: [
         BlocBuilder<ProductCubit, ProductState>(builder: (context,state) =>
@@ -31,6 +58,7 @@ class _ProductPageState extends State<ProductPage> {
                               SearchDialog(initialText: state.search,));
           if(search != null)
           {
+            // ignore: use_build_context_synchronously
             context.read<ProductCubit>().setSearch(search);
           }
         }, icon: const Icon(Icons.search)))
