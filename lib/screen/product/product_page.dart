@@ -23,25 +23,29 @@ class _ProductPageState extends State<ProductPage> {
         title: const Text('Produtos'),
         centerTitle: true,
         actions: [
-        IconButton(onPressed: () async{
+        BlocBuilder<ProductCubit, ProductState>(builder: (context,state) =>
+         IconButton(onPressed: () async{
           final search = await showDialog<String>(
                           context: context,
                           builder: (_) =>
-                              SearchDialog());
+                              SearchDialog(initialText: state.search,));
           if(search != null)
           {
-            return;
+            context.read<ProductCubit>().setSearch(search);
           }
-        }, icon: const Icon(Icons.search))
+        }, icon: const Icon(Icons.search)))
+       
         ],
       ),
       body: BlocBuilder<ProductCubit, ProductState>(
-        builder: (context, state) => ListView.builder(
+        builder: (context, state) { 
+        final filteredProducts =   BlocProvider.of<ProductCubit>(context).filteredProducts();
+            return ListView.builder(
             padding: const EdgeInsets.all(4.0),
-            itemCount: state.products!.length,
+            itemCount: filteredProducts.length,
             itemBuilder: (context, index) =>
-                ProductListTile(product: state.products![index])),
-      ),
+                ProductListTile(product: filteredProducts[index]));
+     }   ),
     );
   }
 }
