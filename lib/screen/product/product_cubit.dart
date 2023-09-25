@@ -7,22 +7,19 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit() : super(ProductState(products: [], search: ''));
   FirebaseProductHelper helper = FirebaseProductHelper();
 
-  setSearch(String value)
-  {
+  setSearch(dynamic value) {
     emit(ProductState(search: value, products: state.products));
   }
 
-  List<ProductModel> filteredProducts()
-  {
-  final List<ProductModel> filteredProduct = [];
-  if(state.search == null)
-  {
-    filteredProduct.addAll(helper.allProducts);
-  } else 
-  {
-    filteredProduct.addAll(helper.allProducts.where((p) => p.name!.toLowerCase().contains(state.search!.toLowerCase())));
-  }
-  return filteredProduct;
+  List<ProductModel> filteredProducts() {
+    final List<ProductModel> filteredProduct = [];
+    if (state.search == null) {
+      filteredProduct.addAll(helper.allProducts);
+    } else {
+      filteredProduct.addAll(helper.allProducts.where(
+          (p) => p.name!.toLowerCase().contains(state.search!.toLowerCase())));
+    }
+    return filteredProduct;
   }
 
   Future<void> loadAllProducts() async {
