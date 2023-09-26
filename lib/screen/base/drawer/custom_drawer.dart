@@ -22,7 +22,7 @@ class CustomDrawer extends StatelessWidget {
           DrawerTile(
             iconData: Icons.list,
             title: 'Produtos',
-            page: '/ProductModule/',
+            page: '/ProductsModule/',
           ),
           DrawerTile(
             iconData: Icons.playlist_add_check,

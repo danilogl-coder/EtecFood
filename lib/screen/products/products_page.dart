@@ -15,8 +15,13 @@ class ProductsPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductsPage> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     BlocProvider.of<ProductCubit>(context).loadAllProducts();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
@@ -84,6 +89,7 @@ class _ProductPageState extends State<ProductsPage> {
             padding: const EdgeInsets.all(4.0),
             itemCount: filteredProducts.length,
             itemBuilder: (context, index) {
+              print(filteredProducts[index]);
               return ProductListTile(
                 product: filteredProducts[index],
               );

@@ -1,6 +1,6 @@
 import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/models/product_model.dart';
-import 'package:etecfood/screen/product/product_state.dart';
+import 'package:etecfood/screen/products/products_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCubit extends Cubit<ProductState> {
@@ -11,7 +11,7 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductState(search: value, products: state.products));
   }
 
-  List<ProductModel> filteredProducts() {
+  List<ProductModel> get filteredProducts {
     final List<ProductModel> filteredProduct = [];
     if (state.search == null) {
       filteredProduct.addAll(helper.allProducts);

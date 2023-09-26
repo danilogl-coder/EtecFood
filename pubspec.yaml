@@ -44,6 +44,7 @@ dependencies:
   image_picker: ^1.0.4
   firebase_storage: ^11.2.6
   brasil_fields: ^1.14.0
+  flutter_carousel_widget: ^2.1.0
 
 dev_dependencies:
   flutter_test:

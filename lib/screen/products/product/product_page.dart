@@ -1,0 +1,82 @@
+import 'package:etecfood/models/product_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+
+class ProductPage extends StatelessWidget {
+  const ProductPage({super.key, required this.product});
+
+  final ProductModel product;
+  @override
+  Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(product.name!),
+        centerTitle: true,
+      ),
+      body: ListView(
+        children: [
+          FlutterCarousel(
+            options: CarouselOptions(
+              height: 400.0,
+              showIndicator: true,
+              slideIndicator: const CircularSlideIndicator(),
+            ),
+            items: product.images!.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(color: Colors.white),
+                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Image.network(i));
+                },
+              );
+            }).toList(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                product.name!,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+              const Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text(
+                    'A partir de',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  )),
+            ]),
+          ),
+          Text(
+            'R\$ 19,99',
+            style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+                color: primaryColor),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 16.0, bottom: 8.0),
+            child: Text(
+              'Descrição',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Text(
+            product.description!,
+            style: const TextStyle(
+              fontSize: 16.0,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

@@ -1,10 +1,14 @@
 import 'package:etecfood/helpers/firebase_product_helper.dart';
-import 'package:etecfood/screen/product/product_cubit.dart';
-import 'package:etecfood/screen/product/product_page.dart';
+
+import 'package:etecfood/screen/products/product/product_module.dart';
+
+import 'package:etecfood/screen/products/products_cubit.dart';
+import 'package:etecfood/screen/products/products_page.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ProductModule extends Module {
+class ProductsModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton<FirebaseProductHelper>(FirebaseProductHelper.new);
@@ -16,7 +20,8 @@ class ProductModule extends Module {
     r.child('/',
         child: ((context) => BlocProvider(
               create: (_) => ProductCubit(),
-              child: const ProductPage(),
+              child: ProductsPage(),
             )));
+    r.module("/ProductModule", module: ProductModule());
   }
 }
