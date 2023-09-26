@@ -12,8 +12,7 @@ class ProductListTile extends StatelessWidget {
     print(product);
     return GestureDetector(
       onTap: () {
-        Modular.to
-            .pushNamed('/ProductsModule/ProductModule/', arguments: product);
+        Modular.to.pushNamed('/ProductsModule/ProductPage', arguments: product);
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),

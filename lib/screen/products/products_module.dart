@@ -1,6 +1,6 @@
 import 'package:etecfood/helpers/firebase_product_helper.dart';
-
-import 'package:etecfood/screen/products/product/product_module.dart';
+import 'package:etecfood/models/product_model.dart';
+import 'package:etecfood/screen/products/product/product_page.dart';
 
 import 'package:etecfood/screen/products/products_cubit.dart';
 import 'package:etecfood/screen/products/products_page.dart';
@@ -20,8 +20,12 @@ class ProductsModule extends Module {
     r.child('/',
         child: ((context) => BlocProvider(
               create: (_) => ProductCubit(),
-              child: ProductsPage(),
+              child: const ProductsPage(),
             )));
-    r.module("/ProductModule", module: ProductModule());
+    r.child('/ProductPage',
+        child: ((context) => BlocProvider(
+              create: (_) => ProductCubit(),
+              child: ProductPage(product: r.args.data as ProductModel),
+            )));
   }
 }
