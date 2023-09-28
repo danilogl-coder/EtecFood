@@ -1,4 +1,5 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:etecfood/app_store.dart';
 import 'package:etecfood/helpers/validators_cpf.dart';
 import 'package:etecfood/helpers/validators_email.dart';
 import 'package:etecfood/helpers/validators_phone.dart';
@@ -21,15 +22,15 @@ class RegisterPage extends StatelessWidget {
   //Declarando chave global do formulario
   final _keyRegisterForm = GlobalKey<FormState>();
 
-  final UserModel user = UserModel();
-
-  //Controlador
-  final TextEditingController _controllerCpf = TextEditingController();
+  final UserModel user = autenticado ?? UserModel();
 
   bool visibility = false;
 
   @override
   Widget build(BuildContext context) {
+    //Controlador
+    final TextEditingController _controllerCpf =
+        TextEditingController(text: user.cpf);
     return Scaffold(
       //Configurações de cores
       backgroundColor: const Color.fromRGBO(36, 38, 62, 1.0),
@@ -60,9 +61,12 @@ class RegisterPage extends StatelessWidget {
                         child: Column(
                           children: [
                             //Campo da Foto
-                            RegisterPerfilImage(onSave: (file) => user.photograph = file.path,),
+                            RegisterPerfilImage(
+                                onSave: (file) => user.photograph = file.path,
+                                imagePath: user.photograph),
                             //Campo de Nome
                             TextFormField(
+                              initialValue: user.name,
                               enabled: state.loading ? false : true,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
@@ -84,6 +88,7 @@ class RegisterPage extends StatelessWidget {
                             ),
                             //Campo de E-mail
                             TextFormField(
+                              initialValue: user.email,
                               enabled: state.loading ? false : true,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
@@ -136,11 +141,15 @@ class RegisterPage extends StatelessWidget {
                               obscuringCharacter: "*",
                               keyboardType: TextInputType.text,
                               validator: (pass) {
-                                if (pass!.isEmpty) {
-                                  return "Campo obrigatório";
-                                } else if (pass.length < 6) {
-                                  return 'Senha muito curta';
+                                if (user.id == null ||
+                                    (pass ?? "").isNotEmpty) {
+                                  if (pass!.isEmpty) {
+                                    return "Campo obrigatório";
+                                  } else if (pass.length < 6) {
+                                    return 'Senha muito curta';
+                                  }
                                 }
+
                                 return null;
                               },
                               onSaved: (pass) => user.password = pass,
@@ -158,6 +167,7 @@ class RegisterPage extends StatelessWidget {
                               obscureText: !state.visibility,
                               obscuringCharacter: "*",
                               validator: (pass) {
+                                
                                 if (pass!.isEmpty) {
                                   return "Campo obrigatório";
                                 } else if (pass.length < 6) {
@@ -173,9 +183,10 @@ class RegisterPage extends StatelessWidget {
                             ),
                             //Campo Telefone
                             TextFormField(
+                              initialValue: user.phoneNumber,
                               inputFormatters: [
-                                 FilteringTextInputFormatter.digitsOnly,
-                                 TelefoneInputFormatter(),
+                                FilteringTextInputFormatter.digitsOnly,
+                                TelefoneInputFormatter(),
                               ],
                               enabled: state.loading ? false : true,
                               decoration: CustomInputDecoration
@@ -194,8 +205,8 @@ class RegisterPage extends StatelessWidget {
                             //Campo Cpf
                             TextFormField(
                               inputFormatters: [
-                                 FilteringTextInputFormatter.digitsOnly,
-                                 CpfInputFormatter(),
+                                FilteringTextInputFormatter.digitsOnly,
+                                CpfInputFormatter(),
                               ],
                               controller: _controllerCpf,
                               enabled: state.loading ? false : true,
@@ -234,7 +245,7 @@ class RegisterPage extends StatelessWidget {
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.red),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_keyRegisterForm.currentState!
                                         .validate()) {
                                       _keyRegisterForm.currentState!.save();
@@ -252,24 +263,35 @@ class RegisterPage extends StatelessWidget {
                                             .setLoading(false);
                                         return;
                                       }
-                                      Modular.get<RegisterController>()
-                                          .registrar(
-                                              user: user,
-                                              onFail: (e) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      'Falha ao Cadastrar $e'),
-                                                  backgroundColor: Colors.red,
-                                                ));
-                                              },
-                                              onSuccess: () {
-                                                BlocProvider.of<RegisterCubit>(
-                                                        context)
-                                                    .setLoading(false);
-                                                debugPrint('sucesso');
-                                                Modular.to.pop();
-                                              });
+                                      if (user.id != null) {
+                                        try {
+                                          await Modular.get<
+                                                  RegisterController>()
+                                              .atualizar(user);
+                                        } catch (e) {
+                                          print(e);
+                                        }
+                                      } else {
+                                        Modular.get<RegisterController>()
+                                            .registrar(
+                                                user: user,
+                                                onFail: (e) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        'Falha ao Cadastrar $e'),
+                                                    backgroundColor: Colors.red,
+                                                  ));
+                                                },
+                                                onSuccess: () {
+                                                  BlocProvider.of<
+                                                              RegisterCubit>(
+                                                          context)
+                                                      .setLoading(false);
+                                                  debugPrint('sucesso');
+                                                  Modular.to.pop();
+                                                });
+                                      }
                                     }
                                   },
                                   child: state.loading
