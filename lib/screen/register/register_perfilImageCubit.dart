@@ -8,7 +8,7 @@ class RegisterPerfilImageCubit extends Cubit<RegisterPerfilImageState> {
   RegisterPerfilImageCubit(RegisterPerfilImageState initialState)
       : super(initialState);
 
-  void setPerfilImage(File file) {
+  void setPerfilImage(File? file) {
     emit(RegisterPerfilImageState(file: file));
   }
 }

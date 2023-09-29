@@ -31,7 +31,9 @@ class CustomDrawerHeader extends StatelessWidget {
                       )),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.pushNamed('/RegisterModule/RegisterPage');
+                    },
                     icon: Icon(
                       Icons.edit_note,
                       color: Colors.grey[300],

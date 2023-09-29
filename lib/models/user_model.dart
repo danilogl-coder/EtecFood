@@ -29,12 +29,6 @@ class UserModel {
   String? cpf;
   String? photograph;
 
-  //Função pra salvar os dados
-  DocumentReference get firestoreRef =>
-      FirebaseFirestore.instance.doc('users/$id');
-  Future<void> saveData() async {
-    await firestoreRef.set(toMap());
-  }
 
   Map<String, dynamic> toMap() {
     return {

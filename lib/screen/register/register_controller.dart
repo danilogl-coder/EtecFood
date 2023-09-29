@@ -22,18 +22,17 @@ class RegisterController {
       await registerHelper.signUp(email: user.email, senha: user.password);
       user.id = autenticado!.id;
       userModel = user;
-      await userModel!.saveData();
-      if (userModel!.photograph != null) {
-        await uploadPhoto(userModel!);
-      }
-
+      await registerHelper.salvar(userModel!);
+     
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }
   }
 
-  uploadPhoto(UserModel userModel) async {
-    await registerHelper.uploadImage(userModel);
+  atualizar(UserModel user)
+  async {
+   await registerHelper.atualizar(user);
   }
+
 }

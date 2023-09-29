@@ -42,7 +42,7 @@ class FirebaseLoginHelper {
           await firestore.collection('users').doc(autenticado!.id).get();
       autenticado = UserModel.fromDocument(documentUser);
       if (autenticado!.photograph != null) {
-        //downloadPhoto(autenticado!.photograph);
+        downloadPhoto(autenticado!.photograph);
       }
       //print(autenticado!.name);
 
