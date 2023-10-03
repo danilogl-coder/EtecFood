@@ -60,7 +60,7 @@ class ProductPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width - 40,
-                    child: Text('${product.description!} ddddddd ddddddddd dddddddd ddddddd  dddddddddddddddddd dddddddddddddddd dddddddddddd ddddddddddd dddddddddd ddddddddddddd ddddddddddddddd ddddddddddd ddddddddddd' ,style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14.0), softWrap: true, maxLines: 20,)),
+                    child: Text(product.description! ,style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14.0), softWrap: true, maxLines: 20,)),
                 ],
               ),
               
@@ -75,17 +75,20 @@ class ProductPage extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(child: Container()),
-                SizedBox(
-                          height: 44,
-                          child: ElevatedButton(
-                            onPressed:() {},
-                           style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromARGB(255, 65, 69, 110)),
-                            child: const Text('Adicionar ao carrinho', style: TextStyle(
-                                  color: Colors.white, fontSize: 18.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                            height: 44,
+                            child: ElevatedButton(
+                              onPressed:() {},
+                             style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color.fromARGB(255, 65, 69, 110)),
+                              child: const Text('Adicionar ao carrinho', style: TextStyle(
+                                    color: Colors.white, fontSize: 18.0),
+                              ),
                             ),
                           ),
-                        ),
+                ),
               ],
             ),
           ),
