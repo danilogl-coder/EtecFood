@@ -57,7 +57,7 @@ class FirebaseLoginHelper {
     final storageRef = FirebaseStorage.instance.ref();
 
 // Create a reference with an initial file path and name
-    final pathReference = storageRef.child("users/$photograph");
+    final pathReference = storageRef.child("user/$photograph");
 
     final List<int> data = await pathReference.getData() as List<int>;
     final Directory tempDir = await getTemporaryDirectory();

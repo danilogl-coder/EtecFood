@@ -31,7 +31,7 @@ class RegisterPerfilImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bloc =  RegisterPerfilImageCubit(RegisterPerfilImageState());
-    getTemporaryDirectory().then((imageDir) => bloc.setPerfilImage(imagePath == null ? null : File('${imageDir.path}/imagePath!'))
+    getTemporaryDirectory().then((imageDir) => bloc.setPerfilImage(imagePath == null ? null : File('${imageDir.path}/${imagePath!}'))
     );
 
     

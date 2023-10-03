@@ -23,7 +23,7 @@ class RegisterController {
       user.id = autenticado!.id;
       userModel = user;
       await registerHelper.salvar(userModel!);
-     
+      autenticado = UserModel();
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));

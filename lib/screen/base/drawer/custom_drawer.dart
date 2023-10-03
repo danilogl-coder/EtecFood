@@ -1,3 +1,4 @@
+import 'package:etecfood/app_store.dart';
 import 'package:etecfood/screen/base/drawer/custom_drawer_header.dart';
 import 'package:flutter/material.dart';
 
@@ -11,25 +12,25 @@ class CustomDrawer extends StatelessWidget {
     //Estou criando um menu Drawer(Gaveta)
     return Drawer(
       child: ListView(
-        children: const [
-          CustomDrawerHeader(),
+        children: [
+          CustomDrawerHeader(imagePath: autenticado!.photograph),
           //Criei um Tile Separado chamado DrawerTile o que me permite instanciar fancilmente dados nele.
-          DrawerTile(
+          const DrawerTile(
             iconData: Icons.home,
             title: 'Inicio',
             page: '/',
           ),
-          DrawerTile(
+          const DrawerTile(
             iconData: Icons.list,
             title: 'Produtos',
             page: '/ProductsModule/',
           ),
-          DrawerTile(
+          const DrawerTile(
             iconData: Icons.playlist_add_check,
             title: 'Meus Pedidos',
             page: '/MeusPedidos',
           ),
-          DrawerTile(
+          const DrawerTile(
             iconData: Icons.location_on,
             title: 'Lojas',
             page: '/Lojas',
