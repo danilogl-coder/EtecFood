@@ -8,7 +8,7 @@ class ProductPage extends StatelessWidget {
   final ProductModel product;
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -40,16 +40,37 @@ class ProductPage extends StatelessWidget {
           children: [
             Text(product.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
             const Divider(thickness: 2, color: Colors.black,),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+             const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-               Text('Por \$R:' ,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),)
+               Text('Por R\$:' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0,),),
+                 Text('19.99' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0, color: Colors.green),)
             ],),
             const Row(
               children: [
-                Text('Descrição:' ,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),)
+                Text('Descrição:' ,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),)
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(product.description! ,style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14.0), softWrap: true,),
+              ],
+            ),
+            const SizedBox(
+              height: 150,
+            ),
+             SizedBox(
+                    height: 44,
+                    child: ElevatedButton(
+                      onPressed:() {},
+                     style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 65, 69, 110)),
+                      child: const Text('Adicionar ao carrinho', style: TextStyle(
+                            color: Colors.white, fontSize: 18.0),
+                      ),
+                    ),
+                  )
           ],
          ),)
         ],
