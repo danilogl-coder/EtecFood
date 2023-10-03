@@ -4,6 +4,7 @@ import 'package:etecfood/app_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../models/user_model.dart';
 
@@ -28,6 +29,7 @@ class FirebaseLoginHelper {
   //Desloga
   Future<void> signOut() async {
     await auth.signOut();
+    autenticado = UserModel();
     Modular.to.pushNamed('/LoginModule/');
   }
 
@@ -55,11 +57,12 @@ class FirebaseLoginHelper {
     final storageRef = FirebaseStorage.instance.ref();
 
 // Create a reference with an initial file path and name
-    final pathReference = storageRef.child("users/$photograph.jpg");
+    final pathReference = storageRef.child("users/$photograph");
 
     final List<int> data = await pathReference.getData() as List<int>;
-
-    File file = File("$photograph.jpg");
+    final Directory tempDir = await getTemporaryDirectory();
+    
+    File file = File("${tempDir.path}/$photograph");
     await file.open(mode: FileMode.write);
     file.writeAsBytes(data);
   }

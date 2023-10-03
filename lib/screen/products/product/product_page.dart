@@ -19,7 +19,7 @@ class ProductPage extends StatelessWidget {
         children: [
           FlutterCarousel(
             options: CarouselOptions(
-              height: 400.0,
+              height: 270.0,
               showIndicator: true,
               slideIndicator: const CircularSlideIndicator(),
             ),
@@ -35,46 +35,23 @@ class ProductPage extends StatelessWidget {
               );
             }).toList(),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                product.name!,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-              ),
-              const Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Text(
-                    'A partir de',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                  )),
-            ]),
-          ),
-          Text(
-            'R\$ 19,99',
-            style: TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-                color: primaryColor),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 16.0, bottom: 8.0),
-            child: Text(
-              'Descrição',
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ),
+         Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0),
+         child: Column(
+          children: [
+            Text(product.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),),
+            const Divider(thickness: 2, color: Colors.black,),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+               Text('Por \$R:' ,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),)
+            ],),
+            const Row(
+              children: [
+                Text('Descrição:' ,style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),)
+              ],
             ),
-          ),
-          Text(
-            product.description!,
-            style: const TextStyle(
-              fontSize: 16.0,
-            ),
-          )
+          ],
+         ),)
         ],
       ),
     );

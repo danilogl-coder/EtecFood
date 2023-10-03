@@ -6,6 +6,7 @@ import 'package:etecfood/screen/register/register_perfilImageState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 // ignore: must_be_immutable
 class RegisterPerfilImage extends StatelessWidget {
@@ -30,7 +31,9 @@ class RegisterPerfilImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bloc =  RegisterPerfilImageCubit(RegisterPerfilImageState());
-    bloc.setPerfilImage(imagePath == null ? null : File(imagePath!));
+    getTemporaryDirectory().then((imageDir) => bloc.setPerfilImage(imagePath == null ? null : File('${imageDir.path}/imagePath!'))
+    );
+
     
     return BlocBuilder<RegisterPerfilImageCubit, RegisterPerfilImageState>(
       bloc: bloc,

@@ -105,11 +105,11 @@ class RegisterPage extends StatelessWidget {
                               },
                               onSaved: (email) => user.email = email,
                             ),
-                            const SizedBox(
+                            user.id == null ? const SizedBox(
                               height: 15.0,
-                            ),
+                            ) : SizedBox(),
                             //Campo de Senha
-                            TextFormField(
+                            user.id == null ? TextFormField(
                               enabled: state.loading ? false : true,
                               decoration: InputDecoration(
                                   suffixIconColor: Colors.black,
@@ -153,12 +153,12 @@ class RegisterPage extends StatelessWidget {
                                 return null;
                               },
                               onSaved: (pass) => user.password = pass,
-                            ),
-                            const SizedBox(
+                            ) : const Text(''),
+                          user.id == null ?  const SizedBox(
                               height: 15.0,
-                            ),
+                            ) : SizedBox(),
                             //Campo Confirmar senha
-                            TextFormField(
+                            user.id == null ? TextFormField(
                               enabled: state.loading ? false : true,
                               decoration: CustomInputDecoration
                                   .setCustomInputDecoration(
@@ -167,20 +167,22 @@ class RegisterPage extends StatelessWidget {
                               obscureText: !state.visibility,
                               obscuringCharacter: "*",
                               validator: (pass) {
-                                
+                                 if (user.id == null ||
+                                    (pass ?? "").isNotEmpty) {
                                 if (pass!.isEmpty) {
                                   return "Campo obrigatório";
                                 } else if (pass.length < 6) {
                                   return 'Senha muito curta';
                                 }
+                                    }
                                 return null;
                               },
                               keyboardType: TextInputType.text,
                               onSaved: (pass) => user.confirmPassword = pass,
-                            ),
-                            const SizedBox(
+                            ) : const SizedBox(),
+                            user.id == null ? const SizedBox(
                               height: 15.0,
-                            ),
+                            ) : const SizedBox(),
                             //Campo Telefone
                             TextFormField(
                               initialValue: user.phoneNumber,
@@ -253,6 +255,7 @@ class RegisterPage extends StatelessWidget {
                                           .setLoading(true);
                                       if (user.password !=
                                           user.confirmPassword) {
+                                          
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
                                           content:
@@ -268,6 +271,8 @@ class RegisterPage extends StatelessWidget {
                                           await Modular.get<
                                                   RegisterController>()
                                               .atualizar(user);
+                                            BlocProvider.of<RegisterCubit>(context)
+                                            .setLoading(false);
                                         } catch (e) {
                                           print(e);
                                         }
