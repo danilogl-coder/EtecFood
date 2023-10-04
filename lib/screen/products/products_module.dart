@@ -1,6 +1,7 @@
 import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/screen/products/product/product_page.dart';
+import 'package:etecfood/screen/products/products_controller.dart';
 
 import 'package:etecfood/screen/products/products_cubit.dart';
 import 'package:etecfood/screen/products/products_page.dart';
@@ -13,6 +14,7 @@ class ProductsModule extends Module {
   void binds(i) {
     i.addLazySingleton<FirebaseProductHelper>(FirebaseProductHelper.new);
     i.addLazySingleton<ProductCubit>(ProductCubit.new);
+    i.addInstance<ProductController>(ProductController(helper: i(), productCubit: i()));
   }
 
   @override

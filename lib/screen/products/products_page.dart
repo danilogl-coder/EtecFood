@@ -1,10 +1,12 @@
 import 'package:etecfood/screen/base/drawer/custom_drawer.dart';
 import 'package:etecfood/screen/products/components/product_list_tile.dart';
 import 'package:etecfood/screen/products/components/search_dialog.dart';
+import 'package:etecfood/screen/products/products_controller.dart';
 import 'package:etecfood/screen/products/products_cubit.dart';
 import 'package:etecfood/screen/products/products_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -40,7 +42,8 @@ class _ProductPageState extends State<ProductsPage> {
                             ));
                     if (search != null) {
                       // ignore: use_build_context_synchronously
-                      context.read<ProductCubit>().setSearch(search);
+                      BlocProvider.of<ProductCubit>(context).setSearch(search);
+                      Modular.get<ProductController>().updateSearch(search);
                     }
                   },
                   child: Container(
@@ -68,14 +71,17 @@ class _ProductPageState extends State<ProductsPage> {
                             ));
                     if (search != null) {
                       // ignore: use_build_context_synchronously
-                      context.read<ProductCubit>().setSearch(search);
+                      BlocProvider.of<ProductCubit>(context).setSearch(search);
+                      Modular.get<ProductController>().updateSearch(search);
                     }
                   },
                   icon: const Icon(Icons.search));
             } else {
               return IconButton(
                   onPressed: () async {
-                    context.read<ProductCubit>().setSearch(null);
+                    BlocProvider.of<ProductCubit>(context).setSearch(null);
+                    Modular.get<ProductController>().updateSearch(null);
+                    
                   },
                   icon: const Icon(Icons.close));
             }
@@ -84,7 +90,7 @@ class _ProductPageState extends State<ProductsPage> {
       ),
       body: BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
         final filteredProducts =
-            BlocProvider.of<ProductCubit>(context).filteredProducts;
+           Modular.get<ProductController>().filteredProducts;
         return ListView.builder(
             padding: const EdgeInsets.all(4.0),
             itemCount: filteredProducts.length,
