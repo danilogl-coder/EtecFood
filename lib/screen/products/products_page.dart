@@ -81,7 +81,6 @@ class _ProductPageState extends State<ProductsPage> {
                   onPressed: () async {
                     BlocProvider.of<ProductCubit>(context).setSearch(null);
                     Modular.get<ProductController>().updateSearch(null);
-                    
                   },
                   icon: const Icon(Icons.close));
             }
@@ -92,7 +91,7 @@ class _ProductPageState extends State<ProductsPage> {
         children: [
           BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
             final filteredProducts =
-               Modular.get<ProductController>().filteredProducts;
+                Modular.get<ProductController>().filteredProducts;
             return Expanded(
               child: ListView.builder(
                   padding: const EdgeInsets.all(4.0),
@@ -118,7 +117,7 @@ class _ProductPageState extends State<ProductsPage> {
                 elevation: 0,
                 highlightElevation: 0,
                 splashColor: const Color.fromARGB(255, 73, 73, 95),
-                child:const  Icon(Icons.shopping_cart),
+                child: const Icon(Icons.shopping_cart),
               ),
             ),
           )

@@ -23,7 +23,6 @@ class FirebaseLoginHelper {
         await auth.signInWithEmailAndPassword(email: email, password: senha);
     user = auth.currentUser;
     autenticado = UserModel(id: result.user!.uid);
-    await cartHelper!.getCartReference(autenticado!);
     final DocumentSnapshot documentUser =
         await firestore.collection('users').doc(autenticado!.id).get();
     autenticado = UserModel.fromDocument(documentUser);
@@ -64,7 +63,7 @@ class FirebaseLoginHelper {
 
     final List<int> data = await pathReference.getData() as List<int>;
     final Directory tempDir = await getTemporaryDirectory();
-    
+
     File file = File("${tempDir.path}/$photograph");
     await file.open(mode: FileMode.write);
     file.writeAsBytes(data);
