@@ -1,31 +1,25 @@
+
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
-import 'package:etecfood/models/cart_model.dart';
+import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/screen/cart/cart_controller.dart';
 import 'package:etecfood/screen/cart/cart_cubit.dart';
 import 'package:etecfood/screen/cart/cart_state.dart';
 import 'package:etecfood/screen/cart/components/cart_tile.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // ignore: must_be_immutable
-class CartScreen extends StatefulWidget {
-  CartScreen({super.key});
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
 
-  @override
-  State<CartScreen> createState() => _CartScreenState();
-}
 
-class _CartScreenState extends State<CartScreen> {
-  @override
-  initState() {
-    super.initState();
-    Modular.get<CartCubit>().loadAllCart();
-  }
 
-  @override
+@override
   Widget build(BuildContext context) {
+    Modular.get<CartController>().loadAllCart();
+    var helper = FirebaseProductHelper();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Carrinho'),
@@ -33,13 +27,28 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
-          return ListView(
+          return state.loading ? const Center(
+            child: CircularProgressIndicator( 
+              valueColor: AlwaysStoppedAnimation(Colors.white),
+            ),
+          ) : 
+          ListView(
             children: [
               Column(
+
+                
                 children: (state.items ?? [])
-                    .map((cartProduct) => CartTile(
-                          cartModel: cartProduct,
-                        ))
+                    .map((cartProduct) => FutureBuilder(
+                      future: helper.getProduct(cartProduct.productID!),
+                      builder: (context, snapshot) => snapshot.hasData ?  CartTile(
+                            cartModel: cartProduct ,
+                          ) : const Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(Colors.white),
+                            ),
+                          ),
+                    ))
                     .toList(),
               ),
             ],

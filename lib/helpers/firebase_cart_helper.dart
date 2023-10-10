@@ -19,12 +19,22 @@ class FirebaseCartHelper {
           .collection('cart')
           .get();
 
+      List<CartModel?> items = snapshotCart.docs.map((e) => CartModel.fromDocument(e)).toList();
       //puxando tudo nele e atribuindo na minha lista.;
-      List<CartModel>? items =
-          snapshotCart.docs.map((d) => CartModel.fromDocument(d)).toList();
+      
+       
+          
+          
+          /*snapshotCart.docs.       
+          map((d)  {
+            return await d.data()
+            /*var doc = await d;
+            return CartModel.fromDocument(d);*/
+          }).toList();
+*/
+      print(items);    
       return items;
     } catch (e) {
-      return print(e);
     }
   }
 }

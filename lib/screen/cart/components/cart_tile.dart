@@ -23,7 +23,7 @@ class CartTile extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                cartModel.productModel!.name!,
+                cartModel.productModel?.name ?? '',
                 style: const TextStyle(
                     fontWeight: FontWeight.w500, fontSize: 17.0),
               ),

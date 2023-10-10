@@ -16,4 +16,10 @@ class FirebaseProductHelper {
     return allProducts =
         snapProducts.docs.map((e) => ProductModel.fromDocument(e)).toList();
   }
+
+  Future<ProductModel> getProduct(String id)
+  async {
+     final DocumentSnapshot snapProducts = await (firestore.doc('products/$id')).get();
+    return ProductModel.fromDocument(snapProducts);
+  }
 }

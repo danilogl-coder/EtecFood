@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/screen/cart/cart_cubit.dart';
 
@@ -9,7 +9,20 @@ class CartController {
   final FirebaseCartHelper helper;
   final CartCubit cartCubit;
 
-  CollectionReference? cartReference;
+  Future<void> loadAllCart() async {
+    cartCubit.setLoading();
+    try {
+    final itemsCart = await helper.loadCartItems();
+    cartCubit.setComplete(itemsCart);
+    } catch (e) {
+      print(e);
+      rethrow;
+    } 
+    
+   
+
+
+  }
 
   //Atualiza carrinho se o Usuario estiver logado
 }

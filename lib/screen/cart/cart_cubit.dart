@@ -4,11 +4,17 @@ import 'package:etecfood/screen/cart/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {
-  CartCubit() : super(CartState(items: []));
-  FirebaseCartHelper helper = FirebaseCartHelper();
+  CartCubit() : super(CartState(items: [], loading: false));
 
-  Future<void> loadAllCart() async {
-    final itemsCart = await helper.loadCartItems();
-    emit(CartState(items: await itemsCart));
+  setLoading()
+  {
+    emit(CartState(items: [], loading: true));
   }
+
+  setComplete(List<CartModel> items)
+  {
+    emit(CartState(items: items, loading: false));
+  }
+
+  
 }
