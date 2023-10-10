@@ -48,7 +48,10 @@ class FirebaseRegisterHelper {
 
     DocumentReference ref = FirebaseFirestore.instance.doc('users/${user.id}');
     ref.set(user.toMap());
+
+    
   }
+
 
   atualizar(UserModel user) async {
     //Função pra salvar os dados

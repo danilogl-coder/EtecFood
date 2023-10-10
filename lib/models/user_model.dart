@@ -29,7 +29,6 @@ class UserModel {
   String? cpf;
   String? photograph;
 
-
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -39,4 +38,5 @@ class UserModel {
       'photograph': photograph,
     };
   }
+  
 }

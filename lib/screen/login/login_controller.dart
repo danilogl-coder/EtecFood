@@ -15,9 +15,10 @@ class LoginController {
       required Function onFail,
       required Function onSuccess}) async {
     try {
-      
+     
       await helper.signIn(email: user.email, senha: user.password);
       onSuccess();
+   
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
     }

@@ -1,6 +1,7 @@
 import 'package:etecfood/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key, required this.product});
@@ -80,7 +81,9 @@ class ProductPage extends StatelessWidget {
                   child: SizedBox(
                             height: 44,
                             child: ElevatedButton(
-                              onPressed:() {},
+                              onPressed:() {
+                                Modular.to.pushNamed("/CartModule/");
+                              },
                              style: ElevatedButton.styleFrom(
                                   backgroundColor: Color.fromARGB(255, 65, 69, 110)),
                               child: const Text('Adicionar ao carrinho', style: TextStyle(

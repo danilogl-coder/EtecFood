@@ -88,19 +88,42 @@ class _ProductPageState extends State<ProductsPage> {
           })
         ],
       ),
-      body: BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
-        final filteredProducts =
-           Modular.get<ProductController>().filteredProducts;
-        return ListView.builder(
-            padding: const EdgeInsets.all(4.0),
-            itemCount: filteredProducts.length,
-            itemBuilder: (context, index) {
-              print(filteredProducts[index]);
-              return ProductListTile(
-                product: filteredProducts[index],
-              );
-            });
-      }),
+      body: Column(
+        children: [
+          BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
+            final filteredProducts =
+               Modular.get<ProductController>().filteredProducts;
+            return Expanded(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(4.0),
+                  itemCount: filteredProducts.length,
+                  itemBuilder: (context, index) {
+                    print(filteredProducts[index]);
+                    return ProductListTile(
+                      product: filteredProducts[index],
+                    );
+                  }),
+            );
+          }),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  Modular.to.pushNamed("/CartModule/");
+                },
+                backgroundColor: Colors.white,
+                foregroundColor: const Color.fromARGB(255, 17, 17, 37),
+                elevation: 0,
+                highlightElevation: 0,
+                splashColor: const Color.fromARGB(255, 73, 73, 95),
+                child:const  Icon(Icons.shopping_cart),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

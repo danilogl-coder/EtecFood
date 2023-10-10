@@ -7,11 +7,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../models/user_model.dart';
+import 'firebase_cart_helper.dart';
 
 class FirebaseLoginHelper {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user;
+  FirebaseCartHelper? cartHelper = FirebaseCartHelper();
 
   FirebaseLoginHelper();
 
@@ -21,6 +23,7 @@ class FirebaseLoginHelper {
         await auth.signInWithEmailAndPassword(email: email, password: senha);
     user = auth.currentUser;
     autenticado = UserModel(id: result.user!.uid);
+    await cartHelper!.getCartReference(autenticado!);
     final DocumentSnapshot documentUser =
         await firestore.collection('users').doc(autenticado!.id).get();
     autenticado = UserModel.fromDocument(documentUser);
