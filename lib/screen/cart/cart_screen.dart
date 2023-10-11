@@ -1,5 +1,4 @@
 
-import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/screen/cart/cart_controller.dart';
 import 'package:etecfood/screen/cart/cart_cubit.dart';
