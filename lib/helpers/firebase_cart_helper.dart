@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/app_store.dart';
 import 'package:etecfood/models/cart_model.dart';
+import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/models/user_model.dart';
 
 class FirebaseCartHelper {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   //Criei uma instancia de UserModel;
   UserModel? user = UserModel();
-  //Criei uma lista de CartModels
+
+  //Lista de CartModel chamada items;
+  List<CartModel?>? items;
+ 
 
   //Carrega os Items do Carrinho
   Future loadCartItems() async {
@@ -19,22 +23,32 @@ class FirebaseCartHelper {
           .collection('cart')
           .get();
 
-      List<CartModel?> items = snapshotCart.docs.map((e) => CartModel.fromDocument(e)).toList();
-      //puxando tudo nele e atribuindo na minha lista.;
-      
-       
-          
-          
-          /*snapshotCart.docs.       
-          map((d)  {
-            return await d.data()
-            /*var doc = await d;
-            return CartModel.fromDocument(d);*/
-          }).toList();
-*/
+      items = snapshotCart.docs.map((e) => CartModel.fromDocument(e)).toList();
+
       print(items);    
       return items;
     } catch (e) {
+    }
+  }
+
+  //Adicionar items ao carrinho
+  void addToCart(ProductModel product)
+  async {
+    try {
+      final e = items!.firstWhere((p) => p!.stackable(product));
+      e!.increment();
+    } catch (e) {
+      final cartModel = CartModel.fromProduct(product);
+      items?.add(cartModel);
+
+        //Aqui estou pegando a referencia do carrinho,
+          firestore
+          .collection('users')
+          .doc(autenticado!.id)
+          .collection('cart')
+          .add(cartModel.toCartItemMap()).then((doc) => cartModel.id = doc.id);
+
+
     }
   }
 }
