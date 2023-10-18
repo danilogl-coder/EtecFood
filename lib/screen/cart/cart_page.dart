@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // ignore: must_be_immutable
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
 
 
 

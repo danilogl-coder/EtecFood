@@ -1,3 +1,4 @@
+import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -82,6 +83,7 @@ class ProductPage extends StatelessWidget {
                             height: 44,
                             child: ElevatedButton(
                               onPressed:() {
+                                Modular.get<FirebaseCartHelper>().addToCart(product);
                                 Modular.to.pushNamed("/CartModule/");
                               },
                              style: ElevatedButton.styleFrom(

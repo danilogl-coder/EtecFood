@@ -9,6 +9,11 @@ class CartController {
   final FirebaseCartHelper helper;
   final CartCubit cartCubit;
 
+  //Adicionar Itens ao Carrinho
+ 
+
+
+  //Carregar todos os Itens do Carrinho
   Future<void> loadAllCart() async {
     cartCubit.setLoading();
     try {
@@ -19,10 +24,7 @@ class CartController {
       rethrow;
     } 
     
-   
-
-
   }
 
-  //Atualiza carrinho se o Usuario estiver logado
+  
 }

@@ -4,7 +4,7 @@ import 'package:etecfood/models/product_model.dart';
 class CartModel {
   String? id;
   String? productID;
-  late int? quantity;
+  late int quantity;
 
   //Instanciando ProductModel;
   ProductModel? productModel;
@@ -28,9 +28,30 @@ class CartModel {
 
   }
 
+  Map<String, dynamic> toCartItemMap()
+  {
+    return {
+      'product_id' : productID,
+      'quantity' : quantity,
+    };
+  }
+
+  //Produto Stackable
+  bool stackable(ProductModel product)
+  {
+    return product.id == productID;
+  }
+
+  //Acrescentar item
+  void increment()
+  {
+    quantity++;
+  }
+
   @override
   String toString() {
     return "CartModel: $id, $productID, $quantity";
   }
+
 
 }

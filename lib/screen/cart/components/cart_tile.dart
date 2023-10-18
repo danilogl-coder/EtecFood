@@ -1,3 +1,4 @@
+import 'package:etecfood/commom_components/custom_iconbutton.dart';
 import 'package:etecfood/models/cart_model.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,13 @@ class CartTile extends StatelessWidget {
               ),
             ]),
           )),
+          Column(
+            children: [
+              CustomIconButton(iconData: Icons.add, color: Colors.grey, onTap: (){}),
+              Text('0'),
+              CustomIconButton(iconData: Icons.remove, color: Colors.grey, onTap: (){})
+            ],
+          )
         ]),
       ),
     );
