@@ -84,7 +84,7 @@ class ProductPage extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed:() {
                                 Modular.get<FirebaseCartHelper>().addToCart(product);
-                                Modular.to.pushNamed("/CartModule/");
+                                
                               },
                              style: ElevatedButton.styleFrom(
                                   backgroundColor: Color.fromARGB(255, 65, 69, 110)),

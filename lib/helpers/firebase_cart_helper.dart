@@ -3,6 +3,7 @@ import 'package:etecfood/app_store.dart';
 import 'package:etecfood/models/cart_model.dart';
 import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/models/user_model.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class FirebaseCartHelper {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -33,22 +34,26 @@ class FirebaseCartHelper {
 
   //Adicionar items ao carrinho
   void addToCart(ProductModel product)
-  async {
+   async {
     try {
-      final e = items!.firstWhere((p) => p!.stackable(product));
+      items = await loadCartItems();
+      final e = items?.firstWhere((p) => p!.stackable(product));
       e!.increment();
-    } catch (e) {
-      final cartModel = CartModel.fromProduct(product);
-      items?.add(cartModel);
+      Modular.to.pushNamed("/CartModule/");
+
+    } catch (e){
+      final cartModel =  CartModel.fromProduct(product);
+      items!.add(cartModel);
 
         //Aqui estou pegando a referencia do carrinho,
-          firestore
+         await firestore
           .collection('users')
           .doc(autenticado!.id)
           .collection('cart')
           .add(cartModel.toCartItemMap()).then((doc) => cartModel.id = doc.id);
-
-
+          Modular.to.pushNamed("/CartModule/");
+           
+         
     }
   }
 }
