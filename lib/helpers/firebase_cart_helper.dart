@@ -11,7 +11,7 @@ class FirebaseCartHelper {
   UserModel? user = UserModel();
 
   //Lista de CartModel chamada items;
-  List<CartModel?>? items;
+  List<CartModel?>? items = [];
  
 
   //Carrega os Items do Carrinho

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/models/product_model.dart';
 
 class CartModel {
+  CartModel();
   String? id;
   String? productID;
   late int quantity;
