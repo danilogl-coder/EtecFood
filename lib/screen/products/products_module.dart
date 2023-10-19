@@ -1,6 +1,8 @@
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/models/product_model.dart';
+import 'package:etecfood/screen/cart/cart_controller.dart';
+import 'package:etecfood/screen/cart/cart_cubit.dart';
 import 'package:etecfood/screen/products/product/product_page.dart';
 import 'package:etecfood/screen/products/products_controller.dart';
 
@@ -14,9 +16,13 @@ class ProductsModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton<FirebaseProductHelper>(FirebaseProductHelper.new);
-    i.addLazySingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
     i.addLazySingleton<ProductCubit>(ProductCubit.new);
-    i.addInstance<ProductController>(ProductController(helper: i(), productCubit: i()));
+    i.addInstance<ProductController>(
+        ProductController(helper: i(), productCubit: i()));
+
+    i.addLazySingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
+    i.addLazySingleton<CartCubit>(CartCubit.new);
+    i.addInstance<CartController>(CartController(helper: i(), cartCubit: i()));
   }
 
   @override
