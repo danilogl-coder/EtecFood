@@ -1,6 +1,11 @@
 import 'package:etecfood/commom_components/custom_iconbutton.dart';
 import 'package:etecfood/models/cart_model.dart';
+import 'package:etecfood/screen/cart/cart_controller.dart';
+import 'package:etecfood/screen/cart/components/cart_tile_cubit.dart';
+import 'package:etecfood/screen/cart/components/cart_tile_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class CartTile extends StatelessWidget {
   const CartTile({super.key, required this.cartModel});
@@ -44,12 +49,20 @@ class CartTile extends StatelessWidget {
               ),
             ]),
           )),
-          Column(
-            children: [
-              CustomIconButton(iconData: Icons.add, color: Colors.grey, onTap: (){}),
-              Text('0'),
-              CustomIconButton(iconData: Icons.remove, color: Colors.grey, onTap: (){})
-            ],
+          
+  
+          BlocBuilder<CartTileCubit,CartTileState>(
+            builder: (context, state) => Column(
+              children: [
+                CustomIconButton(iconData: Icons.add, color: Colors.grey, onTap: (){
+                Modular.get<CartController>().
+                }),
+                Text("${state.quantity}"),
+                CustomIconButton(iconData: Icons.remove, color: Colors.grey, onTap: (){
+          
+                })
+              ],
+            ),
           )
         ]),
       ),

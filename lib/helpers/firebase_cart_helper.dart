@@ -33,7 +33,7 @@ class FirebaseCartHelper {
   }
 
   //Adicionar items ao carrinho
-  void addToCart(ProductModel product)
+  void addToCart(CartModel product)
    async {
     try {
       items = await loadCartItems();
