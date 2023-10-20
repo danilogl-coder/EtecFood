@@ -30,10 +30,10 @@ class ProductController {
     productCubit.setSearch(search);
   }
 
-  void addToCart(ProductModel product) {
+  Future<void> addToCart(ProductModel product) async {
 
     var cartModel = CartModel.fromProduct(product);
 
-    cartHelper.addToCart(cartModel);
+    await cartHelper.addToCart(cartModel);
   }
 }

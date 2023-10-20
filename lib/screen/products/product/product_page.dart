@@ -82,10 +82,12 @@ class ProductPage extends StatelessWidget {
                   child: SizedBox(
                             height: 44,
                             child: ElevatedButton(
-                              onPressed:() {
-                                Modular.get<ProductController>().addToCart(product);
+                              onPressed:() async {
+                                await Modular.get<ProductController>().addToCart(product);
                                 //Modular.get<CartController>().addCartItem(product);
-                                Modular.to.pushNamed("/CartModule/");
+                                Modular.to.pushNamed('/CartModule/');
+                               
+                                
                               },
                              style: ElevatedButton.styleFrom(
                                   backgroundColor: Color.fromARGB(255, 65, 69, 110)),

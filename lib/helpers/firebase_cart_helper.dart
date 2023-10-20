@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/app_store.dart';
 import 'package:etecfood/models/cart_model.dart';
 import 'package:etecfood/models/user_model.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class FirebaseCartHelper {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -30,12 +31,11 @@ class FirebaseCartHelper {
 
   //Adicionar items ao carrinho
   Future<void> addToCart(CartModel product) async {
-    //Aqui estou pegando a referencia do carrinho,
-    //DocumentReference<Map<String, dynamic>> doc = 
-      
+    //Estou armazenando o id de produto
     String? id = product.id;
     if(product.id == null)
     {
+    
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('users')
         .doc(autenticado!.id)
@@ -44,24 +44,18 @@ class FirebaseCartHelper {
       {
         id = snapshot.docs.first.id;
         product.quantity++;
+        
+        
       }
      
-
-
     }
 
-    
-    
-      
      await firestore
         .collection('users')
         .doc(autenticado!.id)
         .collection('cart').doc(id).set(product.toCartItemMap());
-      
 
-    
-    
-
+          
     
   }
 }

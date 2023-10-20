@@ -26,7 +26,12 @@ class CartModel {
        productModel = ProductModel.fromDocument(doc);
     
     });
+  }
 
+  CartModel.fromMap(DocumentSnapshot<Map<String, dynamic>> document)
+  {
+   productID = document.id;
+   quantity = document.get('quantity') as int;
   }
 
   Map<String, dynamic> toCartItemMap()
