@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/helpers/firebase_product_helper.dart';
+import 'package:etecfood/models/cart_model.dart';
 import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/screen/products/products_cubit.dart';
 
@@ -30,6 +31,9 @@ class ProductController {
   }
 
   void addToCart(ProductModel product) {
-    cartHelper.addToCart(product);
+
+    var cartModel = CartModel.fromProduct(product);
+
+    cartHelper.addToCart(cartModel);
   }
 }

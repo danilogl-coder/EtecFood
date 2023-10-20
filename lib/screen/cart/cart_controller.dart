@@ -1,5 +1,6 @@
 
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
+import 'package:etecfood/models/cart_model.dart';
 import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/screen/cart/cart_cubit.dart';
 
@@ -11,7 +12,7 @@ class CartController {
   final CartCubit cartCubit;
 
   //Adicionar Itens ao Carrinho
-  addCartItem(ProductModel product)
+  addCartItem(CartModel product)
   {
    helper.addToCart(product);
    

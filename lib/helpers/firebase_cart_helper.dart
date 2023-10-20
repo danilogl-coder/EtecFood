@@ -12,7 +12,6 @@ class FirebaseCartHelper {
 
   //Lista de CartModel chamada items;
   List<CartModel?>? items = [];
- 
 
   //Carrega os Items do Carrinho
   Future loadCartItems() async {
@@ -26,34 +25,45 @@ class FirebaseCartHelper {
 
       items = snapshotCart.docs.map((e) => CartModel.fromDocument(e)).toList();
 
-      print(items);    
+      print(items);
       return items;
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   //Adicionar items ao carrinho
-  void addToCart(CartModel product)
-   async {
-    try {
-      items = await loadCartItems();
-      final e = items?.firstWhere((p) => p!.stackable(product));
-      e!.increment();
-      Modular.to.pushNamed("/CartModule/");
+  Future<void> addToCart(CartModel product) async {
+    //Aqui estou pegando a referencia do carrinho,
+    //DocumentReference<Map<String, dynamic>> doc = 
+      
+    String? id = product.id;
+    if(product.id == null)
+    {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('users')
+        .doc(autenticado!.id)
+        .collection('cart').where("product_id", isEqualTo: product.productID).get();
+      if(snapshot.docs.isNotEmpty)
+      {
+        id = snapshot.docs.first.id;
+        product.quantity++;
+      }
+     
 
-    } catch (e){
-      final cartModel =  CartModel.fromProduct(product);
-      items!.add(cartModel);
 
-        //Aqui estou pegando a referencia do carrinho,
-         await firestore
-          .collection('users')
-          .doc(autenticado!.id)
-          .collection('cart')
-          .add(cartModel.toCartItemMap()).then((doc) => cartModel.id = doc.id);
-          Modular.to.pushNamed("/CartModule/");
-           
-         
     }
+
+    
+    
+      
+     await firestore
+        .collection('users')
+        .doc(autenticado!.id)
+        .collection('cart').doc(id).set(product.toCartItemMap());
+      
+
+    
+    
+
+    
   }
 }

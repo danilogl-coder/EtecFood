@@ -55,11 +55,15 @@ class CartTile extends StatelessWidget {
             builder: (context, state) => Column(
               children: [
                 CustomIconButton(iconData: Icons.add, color: Colors.grey, onTap: (){
-                Modular.get<CartController>().
+                cartModel.increment();
+                BlocProvider.of<CartTileCubit>(context).setQuantity(cartModel.quantity);
+                Modular.get<CartController>().addCartItem(cartModel);
                 }),
                 Text("${state.quantity}"),
                 CustomIconButton(iconData: Icons.remove, color: Colors.grey, onTap: (){
-          
+                 cartModel.decrement();
+                 BlocProvider.of<CartTileCubit>(context).setQuantity(cartModel.quantity);
+                 Modular.get<CartController>().addCartItem(cartModel);
                 })
               ],
             ),
