@@ -1,5 +1,4 @@
 import 'package:etecfood/models/product_model.dart';
-import 'package:etecfood/screen/cart/cart_controller.dart';
 import 'package:etecfood/screen/products/products_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';

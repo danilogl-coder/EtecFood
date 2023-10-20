@@ -1,8 +1,6 @@
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/models/product_model.dart';
-import 'package:etecfood/screen/cart/cart_controller.dart';
-import 'package:etecfood/screen/cart/cart_cubit.dart';
 import 'package:etecfood/screen/products/product/product_page.dart';
 import 'package:etecfood/screen/products/products_controller.dart';
 
