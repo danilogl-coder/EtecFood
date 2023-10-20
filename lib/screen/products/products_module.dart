@@ -15,14 +15,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 class ProductsModule extends Module {
   @override
   void binds(i) {
+    i.addLazySingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
     i.addLazySingleton<FirebaseProductHelper>(FirebaseProductHelper.new);
     i.addLazySingleton<ProductCubit>(ProductCubit.new);
     i.addInstance<ProductController>(
-        ProductController(helper: i(), productCubit: i()));
+        ProductController(helper: i(), productCubit: i(), cartHelper: i()));
 
-    i.addLazySingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
-    i.addLazySingleton<CartCubit>(CartCubit.new);
-    i.addInstance<CartController>(CartController(helper: i(), cartCubit: i()));
+ 
+    
   }
 
   @override

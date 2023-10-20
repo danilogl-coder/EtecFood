@@ -49,6 +49,12 @@ class CartModel {
     quantity++;
   }
 
+  //Decrement
+  void decrement()
+  {
+    quantity--;
+  }
+
   @override
   String toString() {
     return "CartModel: $id, $productID, $quantity";

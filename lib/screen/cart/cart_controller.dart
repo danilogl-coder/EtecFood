@@ -14,7 +14,7 @@ class CartController {
   addCartItem(ProductModel product)
   {
    helper.addToCart(product);
- 
+   
   }
 
 
@@ -29,12 +29,6 @@ class CartController {
       rethrow;
     } 
     
-  }
-
-  //Acrescentar um item no carrinho
-  void increment(int value)
-  {
-    cartCubit.setQuantity(value);
   }
 
   
