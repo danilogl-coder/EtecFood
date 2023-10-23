@@ -23,47 +23,39 @@ class CartModel {
     productID = document.get('product_id') as String;
     quantity = document.get('quantity') as int;
     firestore.doc('products/$productID').get().then((doc) {
-       productModel = ProductModel.fromDocument(doc);
-    
+      productModel = ProductModel.fromDocument(doc);
     });
   }
 
-  CartModel.fromMap(DocumentSnapshot<Map<String, dynamic>> document)
-  {
-   productID = document.id;
-   quantity = document.get('quantity') as int;
+  CartModel.fromMap(DocumentSnapshot<Map<String, dynamic>> document) {
+    productID = document.id;
+    quantity = document.get('quantity') as int;
   }
 
-  Map<String, dynamic> toCartItemMap()
-  {
+  Map<String, dynamic> toCartItemMap() {
     return {
-      'product_id' : productID,
-      'quantity' : quantity,
+      'product_id': productID,
+      'quantity': quantity,
     };
   }
 
   //Produto Stackable
-  bool stackable(ProductModel product)
-  {
+  bool stackable(ProductModel product) {
     return product.id == productID;
   }
 
   //Acrescentar item
-  void increment()
-  {
-    quantity++;
+  void increment() {
+    quantity += 1;
   }
 
   //Decrement
-  void decrement()
-  {
-    quantity--;
+  void decrement() {
+    quantity -= 1;
   }
 
   @override
   String toString() {
     return "CartModel: $id, $productID, $quantity";
   }
-
-
 }

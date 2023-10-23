@@ -33,29 +33,24 @@ class FirebaseCartHelper {
   Future<void> addToCart(CartModel product) async {
     //Estou armazenando o id de produto
     String? id = product.id;
-    if(product.id == null)
-    {
-    
-    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
-        .collection('users')
-        .doc(autenticado!.id)
-        .collection('cart').where("product_id", isEqualTo: product.productID).get();
-      if(snapshot.docs.isNotEmpty)
-      {
+    if (product.id == null) {
+      QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+          .collection('users')
+          .doc(autenticado!.id)
+          .collection('cart')
+          .where("product_id", isEqualTo: product.productID)
+          .get();
+      if (snapshot.docs.isNotEmpty) {
         id = snapshot.docs.first.id;
-        product.quantity++;
-        
-        
+        product.quantity += 1;
       }
-     
     }
 
-     await firestore
+    await firestore
         .collection('users')
         .doc(autenticado!.id)
-        .collection('cart').doc(id).set(product.toCartItemMap());
-
-          
-    
+        .collection('cart')
+        .doc(id)
+        .set(product.toCartItemMap());
   }
 }
