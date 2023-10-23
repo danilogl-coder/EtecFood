@@ -49,22 +49,30 @@ class CartTile extends StatelessWidget {
               ),
             ]),
           )),
-          
-  
-          BlocBuilder<CartTileCubit,CartTileState>(
+          BlocBuilder<CartTileCubit, CartTileState>(
             builder: (context, state) => Column(
               children: [
-                CustomIconButton(iconData: Icons.add, color: Colors.grey, onTap: (){
-                cartModel.increment();
-                BlocProvider.of<CartTileCubit>(context).setQuantity(cartModel.quantity);
-                Modular.get<CartController>().addCartItem(cartModel);
-                }),
+                CustomIconButton(
+                    iconData: Icons.add,
+                    color: Colors.grey,
+                    onTap: () {
+                      cartModel.increment();
+                      BlocProvider.of<CartTileCubit>(context)
+                          .setQuantity(cartModel.quantity);
+                      Modular.get<CartController>().addCartItem(cartModel);
+                    }),
                 Text("${state.quantity}"),
-                CustomIconButton(iconData: Icons.remove, color: Colors.grey, onTap: (){
-                 cartModel.decrement();
-                 BlocProvider.of<CartTileCubit>(context).setQuantity(cartModel.quantity);
-                 Modular.get<CartController>().addCartItem(cartModel);
-                })
+                CustomIconButton(
+                    iconData: Icons.remove,
+                    color: Colors.grey,
+                    onTap: () async {
+                      cartModel.decrement();
+                      BlocProvider.of<CartTileCubit>(context)
+                          .setQuantity(cartModel.quantity);
+                      Modular.get<CartController>().addCartItem(cartModel);
+                      await Modular.get<CartController>()
+                          .removeToCart(cartModel);
+                    })
               ],
             ),
           )

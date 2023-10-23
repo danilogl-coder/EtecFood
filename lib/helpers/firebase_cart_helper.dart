@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:etecfood/app_store.dart';
 import 'package:etecfood/models/cart_model.dart';
 import 'package:etecfood/models/user_model.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class FirebaseCartHelper {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -52,6 +51,15 @@ class FirebaseCartHelper {
         .collection('cart')
         .doc(id)
         .set(product.toCartItemMap());
+  }
+
+  Future removeToCart(CartModel cartModel) async {
+    return await firestore
+        .collection('users')
+        .doc(autenticado!.id)
+        .collection('cart')
+        .doc(cartModel.id)
+        .delete();
   }
 
   //Pegando referencia

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:etecfood/app_store.dart';
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/models/cart_model.dart';
@@ -40,7 +39,9 @@ class ProductController {
     QuerySnapshot snapshotCart =
         await cartHelper.getReferenceBetwenIdAndProductId(cartModel);
 
-    cartModel.quantity = await snapshotCart.docs.first.get('quantity');
+    if (snapshotCart.docs.isNotEmpty) {
+      cartModel.quantity = snapshotCart.docs.first.get('quantity');
+    }
 
     await cartHelper.addToCart(cartModel);
   }
