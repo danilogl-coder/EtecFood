@@ -53,4 +53,16 @@ class FirebaseCartHelper {
         .doc(id)
         .set(product.toCartItemMap());
   }
+
+  //Pegando referencia
+  Future getReferenceBetwenIdAndProductId(CartModel product) async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('users')
+        .doc(autenticado!.id)
+        .collection('cart')
+        .where("product_id", isEqualTo: product.productID)
+        .get();
+
+    return snapshot;
+  }
 }

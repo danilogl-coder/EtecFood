@@ -37,14 +37,10 @@ class ProductController {
   Future<void> addToCart(ProductModel product) async {
     var cartModel = CartModel.fromProduct(product);
 
-    QuerySnapshot snapshotCart = await firebaseFirestore
-        .collection('users')
-        .doc(autenticado!.id)
-        .collection('cart')
-        .where('product_id', isEqualTo: cartModel.productID)
-        .get();
+    QuerySnapshot snapshotCart =
+        await cartHelper.getReferenceBetwenIdAndProductId(cartModel);
 
-    cartModel.quantity = snapshotCart.docs.first.get('quantity');
+    cartModel.quantity = await snapshotCart.docs.first.get('quantity');
 
     await cartHelper.addToCart(cartModel);
   }
