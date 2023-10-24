@@ -5,6 +5,7 @@ import 'package:etecfood/screen/cart/cart_cubit.dart';
 import 'package:etecfood/screen/cart/cart_state.dart';
 import 'package:etecfood/screen/cart/components/cart_tile.dart';
 import 'package:etecfood/screen/cart/components/cart_tile_cubit.dart';
+import 'package:etecfood/screen/cart/components/price_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +55,9 @@ class CartPage extends StatelessWidget {
                     ))
                     .toList(),
               ),
+              PriceCard(buttonText: 'Fazer o pedido', onPressed: (){
+                Modular.get<CartController>().countPrice();
+              })
             ],
           );
         },

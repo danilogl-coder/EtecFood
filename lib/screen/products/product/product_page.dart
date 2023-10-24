@@ -119,7 +119,7 @@ class ProductPage extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 65, 69, 110)),
+                          backgroundColor: const Color.fromARGB(255, 65, 69, 110)),
                       child: const Text(
                         'Adicionar ao carrinho',
                         style: TextStyle(color: Colors.white, fontSize: 18.0),

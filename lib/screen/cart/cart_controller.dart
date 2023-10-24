@@ -1,5 +1,6 @@
 import 'package:etecfood/helpers/firebase_cart_helper.dart';
 import 'package:etecfood/models/cart_model.dart';
+import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/screen/cart/cart_cubit.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -9,6 +10,9 @@ class CartController {
 
   final FirebaseCartHelper helper;
   final CartCubit cartCubit;
+
+  double totalPrice = 0.0;
+  double? unitPrice;
 
   //Adicionar Itens ao Carrinho
   addCartItem(CartModel product) {
@@ -33,4 +37,21 @@ class CartController {
       return await helper.removeToCart(product);
     }
   }
+
+  countPrice() async
+  {
+   List<CartModel> cart = await helper.loadCartItems();
+   ProductModel product;
+
+   Future.forEach(cart, (e) async {
+    var doc = await helper.getProduct(e.id);
+   product = ProductModel.fromDocument(doc);
+   unitPrice = product.price;
+   totalPrice = totalPrice + (unitPrice as double);
+   print(totalPrice);
+   });
+  
+  }
+
+  
 }

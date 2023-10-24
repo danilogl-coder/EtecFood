@@ -25,7 +25,9 @@ class FirebaseCartHelper {
 
       print(items);
       return items;
-    } catch (e) {}
+    } catch (e) {
+      return e;
+    }
   }
 
   //Adicionar items ao carrinho
@@ -62,7 +64,7 @@ class FirebaseCartHelper {
         .delete();
   }
 
-  //Pegando referencia
+  //Pegando referencia entre id de produtos
   Future getReferenceBetwenIdAndProductId(CartModel product) async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('users')
@@ -73,4 +75,14 @@ class FirebaseCartHelper {
 
     return snapshot;
   }
+
+  //Recuperando produtos pelo id
+  Future getProduct(String? id)
+  async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot;
+    snapshot = await firestore.collection('users').doc(autenticado!.id).collection('cart').doc(id).get();
+    return snapshot;
+  }
+
+
 }

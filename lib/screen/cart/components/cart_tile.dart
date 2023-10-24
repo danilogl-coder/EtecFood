@@ -31,19 +31,16 @@ class CartTile extends StatelessWidget {
               Text(
                 cartModel.productModel?.name ?? '',
                 style: const TextStyle(
-                    fontWeight: FontWeight.w500, fontSize: 17.0),
+                    fontWeight: FontWeight.w700, fontSize: 19.0),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  'Tamanho',
-                  style: TextStyle(fontWeight: FontWeight.w300),
-                ),
+             const Padding(
+                padding:  EdgeInsets.all(8.0),
+                child:  Divider(),
               ),
               Text(
-                'R\$',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                'R\$ ${cartModel.productModel!.price}',
+                style: const TextStyle(
+                    color: Colors.green,
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold),
               ),
@@ -61,10 +58,10 @@ class CartTile extends StatelessWidget {
                           .setQuantity(cartModel.quantity);
                       Modular.get<CartController>().addCartItem(cartModel);
                     }),
-                Text("${state.quantity}"),
+                Text("${state.quantity}", style: const TextStyle(fontSize: 15.0,),),
                 CustomIconButton(
                     iconData: Icons.remove,
-                    color: Colors.grey,
+                    color: state.quantity < 2? Colors.red : Colors.grey,
                     onTap: () async {
                       cartModel.decrement();
                       BlocProvider.of<CartTileCubit>(context)
