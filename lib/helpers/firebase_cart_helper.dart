@@ -77,12 +77,16 @@ class FirebaseCartHelper {
   }
 
   //Recuperando produtos pelo id
-  Future getProduct(String? id)
-  async {
+  Future getProduct(String? id) async {
     DocumentSnapshot<Map<String, dynamic>> snapshot;
-    snapshot = await firestore.collection('users').doc(autenticado!.id).collection('cart').doc(id).get();
-    return snapshot;
+    snapshot = await firestore.collection('products').doc(id).get();
+
+    if (snapshot.exists) {
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+      print(data);
+      return data;
+    } else {
+      return null;
+    }
   }
-
-
 }

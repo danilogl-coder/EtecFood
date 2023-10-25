@@ -38,20 +38,17 @@ class CartController {
     }
   }
 
-  countPrice() async
-  {
-   List<CartModel> cart = await helper.loadCartItems();
-   ProductModel product;
+  Future countPrice() async {
+    List<CartModel> cart = await helper.loadCartItems();
+    CartModel product;
 
-   Future.forEach(cart, (e) async {
-    var doc = await helper.getProduct(e.id);
-   product = ProductModel.fromDocument(doc);
-   unitPrice = product.price;
-   totalPrice = totalPrice + (unitPrice as double);
-   print(totalPrice);
-   });
-  
+    Future.forEach(cart, (e) async {
+      product = e;
+      var doc = await helper.getProduct(e.productID);
+      unitPrice = doc['price'] ?? 0.0;
+      unitPrice = (doc['price'] ?? 0.0) * product.quantity;
+      totalPrice = totalPrice + unitPrice!;
+      print(totalPrice);
+    });
   }
-
-  
 }
