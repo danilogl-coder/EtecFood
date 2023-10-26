@@ -1,5 +1,8 @@
 
+import 'package:etecfood/screen/cart/components/price_card_cubit.dart';
+import 'package:etecfood/screen/cart/components/price_card_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class PriceCard extends StatelessWidget {
@@ -23,11 +26,12 @@ class PriceCard extends StatelessWidget {
            
           const Divider(),
           const SizedBox(height: 12.0,),
-           const Row(
+            Row(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Total', style: TextStyle(fontWeight: FontWeight.w600),),
-              Text('R\$ ', style: TextStyle(color: Colors.black, fontSize: 16.0),)
+              const Text('Total', style: TextStyle(fontWeight: FontWeight.w600),),
+              BlocBuilder<PriceCardCubit,PriceCardState>(
+               builder: (context, state) =>  Text('R\$ ${state.total}', style: TextStyle(color: Colors.black, fontSize: 16.0),))
             ],
           ),
           const SizedBox(height: 8.0,),
