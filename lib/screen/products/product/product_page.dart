@@ -54,10 +54,10 @@ class ProductPage extends StatelessWidget {
                     thickness: 2,
                     color: Colors.black,
                   ),
-                  const Row(
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                    const  Text(
                         'Por R\$:',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -65,8 +65,8 @@ class ProductPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '19.99',
-                        style: TextStyle(
+                        '${product.price}',
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24.0,
                             color: Colors.green),
