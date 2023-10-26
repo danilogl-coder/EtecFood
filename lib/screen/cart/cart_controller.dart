@@ -17,9 +17,6 @@ class CartController {
   final CartCubit cartCubit;
   final PriceCardCubit priceCardCubit;
 
-  double totalPrice = 0.0;
-  double? unitPrice;
-
   //Adicionar Itens ao Carrinho
   addCartItem(CartModel product) {
     helper.addToCart(product);
@@ -45,6 +42,8 @@ class CartController {
   }
 
   Future countPrice() async {
+    double totalPrice = 0.0;
+    double? unitPrice;
     List<CartModel> cart = await helper.loadCartItems();
     CartModel product;
 

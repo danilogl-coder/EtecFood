@@ -3,6 +3,8 @@ import 'package:etecfood/models/cart_model.dart';
 import 'package:etecfood/screen/cart/cart_controller.dart';
 import 'package:etecfood/screen/cart/components/cart_tile_cubit.dart';
 import 'package:etecfood/screen/cart/components/cart_tile_state.dart';
+import 'package:etecfood/screen/cart/components/price_card_cubit.dart';
+import 'package:etecfood/screen/cart/components/price_card_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -33,9 +35,9 @@ class CartTile extends StatelessWidget {
                 style: const TextStyle(
                     fontWeight: FontWeight.w700, fontSize: 19.0),
               ),
-             const Padding(
-                padding:  EdgeInsets.all(8.0),
-                child:  Divider(),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Divider(),
               ),
               Text(
                 'R\$ ${cartModel.productModel!.price}',
@@ -46,31 +48,47 @@ class CartTile extends StatelessWidget {
               ),
             ]),
           )),
-          BlocBuilder<CartTileCubit, CartTileState>(
-            builder: (context, state) => Column(
-              children: [
-                CustomIconButton(
-                    iconData: Icons.add,
-                    color: Colors.grey,
-                    onTap: () {
-                      cartModel.increment();
-                      BlocProvider.of<CartTileCubit>(context)
-                          .setQuantity(cartModel.quantity);
-                      Modular.get<CartController>().addCartItem(cartModel);
-                    }),
-                Text("${state.quantity}", style: const TextStyle(fontSize: 15.0,),),
-                CustomIconButton(
-                    iconData: Icons.remove,
-                    color: state.quantity < 2? Colors.red : Colors.grey,
-                    onTap: () async {
-                      cartModel.decrement();
-                      BlocProvider.of<CartTileCubit>(context)
-                          .setQuantity(cartModel.quantity);
-                      Modular.get<CartController>().addCartItem(cartModel);
-                      await Modular.get<CartController>()
-                          .removeToCart(cartModel);
-                    })
-              ],
+          BlocBuilder<PriceCardCubit, PriceCardState>(
+            builder: (context, state) =>
+                BlocBuilder<CartTileCubit, CartTileState>(
+              builder: (context, state) => Column(
+                children: [
+                  CustomIconButton(
+                      iconData: Icons.add,
+                      color: Colors.grey,
+                      onTap: () {
+                        cartModel.increment();
+                        BlocProvider.of<CartTileCubit>(context)
+                            .setQuantity(cartModel.quantity);
+                        BlocProvider.of<PriceCardCubit>(context).setState();
+                        BlocProvider.of<PriceCardCubit>(context)
+                            .updateTotalPrice();
+
+                        Modular.get<CartController>().addCartItem(cartModel);
+                      }),
+                  Text(
+                    "${state.quantity}",
+                    style: const TextStyle(
+                      fontSize: 15.0,
+                    ),
+                  ),
+                  CustomIconButton(
+                      iconData: Icons.remove,
+                      color: state.quantity < 2 ? Colors.red : Colors.grey,
+                      onTap: () async {
+                        cartModel.decrement();
+                        BlocProvider.of<CartTileCubit>(context)
+                            .setQuantity(cartModel.quantity);
+                        BlocProvider.of<PriceCardCubit>(context).setState();
+                        BlocProvider.of<PriceCardCubit>(context)
+                            .updateTotalPrice();
+
+                        Modular.get<CartController>().addCartItem(cartModel);
+                        await Modular.get<CartController>()
+                            .removeToCart(cartModel);
+                      })
+                ],
+              ),
             ),
           )
         ]),

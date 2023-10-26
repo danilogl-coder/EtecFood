@@ -5,10 +5,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PriceCardCubit extends Cubit<PriceCardState> {
   PriceCardCubit(double total) : super(PriceCardState(total: 0.0));
-  double? totalPrice = 0.0;
-  void updateTotalPrice() async {
-    totalPrice = await Modular.get<CartController>().countPrice();
 
+  void updateTotalPrice() async {
+    double? totalPrice = 0.0;
+    totalPrice = await Modular.get<CartController>().countPrice();
     emit(PriceCardState(total: totalPrice));
+  }
+
+  void setState() {
+    emit(PriceCardState(total: 0.0));
   }
 }

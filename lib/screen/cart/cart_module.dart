@@ -20,7 +20,10 @@ class CartModule extends Module {
   void routes(r) {
     r.child('/',
         child: (context) => BlocProvider(
-            create: (context) => Modular.get<CartCubit>(),
-            child: const CartPage()));
+              create: (context) => PriceCardCubit(0.0),
+              child: BlocProvider(
+                  create: (context) => Modular.get<CartCubit>(),
+                  child: const CartPage()),
+            ));
   }
 }

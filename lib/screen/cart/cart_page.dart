@@ -58,11 +58,7 @@ class CartPage extends StatelessWidget {
                               ))
                           .toList(),
                     ),
-                    BlocProvider(
-                      create: (context) => PriceCardCubit(0.0),
-                      child: PriceCard(
-                          buttonText: 'Fazer o pedido', onPressed: () {}),
-                    )
+                    PriceCard(buttonText: 'Fazer o pedido', onPressed: () {})
                   ],
                 );
         },
