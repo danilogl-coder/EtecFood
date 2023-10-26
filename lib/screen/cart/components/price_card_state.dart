@@ -1,8 +1,7 @@
-class PriceCardState 
-{
-  PriceCardState({ required this.total,});
+class PriceCardState {
+  PriceCardState({
+    required this.total,
+  });
 
-final double? total;
-
-  
+  final double? total;
 }

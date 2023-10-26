@@ -7,7 +7,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class CartController {
   //Construtor
-  CartController({required this.helper, required this.cartCubit, required this.priceCardCubit});
+  CartController({
+    required this.helper,
+    required this.cartCubit,
+    required this.priceCardCubit,
+  });
 
   final FirebaseCartHelper helper;
   final CartCubit cartCubit;
@@ -50,13 +54,7 @@ class CartController {
       unitPrice = doc['price'] ?? 0.0;
       unitPrice = (doc['price'] ?? 0.0) * product.quantity;
       totalPrice = totalPrice + unitPrice!;
-      
     });
     return totalPrice;
-  }
-
-  Future<void> updatePrice() async
-  {
-   priceCardCubit.setPrice(await countPrice());
   }
 }

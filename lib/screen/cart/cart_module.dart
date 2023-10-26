@@ -12,15 +12,15 @@ class CartModule extends Module {
     i.addLazySingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
     i.addLazySingleton<CartCubit>(CartCubit.new);
     i.addLazySingleton<PriceCardCubit>(PriceCardCubit.new);
-    i.addInstance<CartController>(CartController(helper: i(), cartCubit: i(), priceCardCubit: PriceCardCubit(0.0)));
-   
+    i.addInstance<CartController>(CartController(
+        helper: i(), cartCubit: i(), priceCardCubit: PriceCardCubit(0.0)));
   }
 
   @override
   void routes(r) {
-   r.child('/', child: (context) =>  BlocProvider(
-    create: (context) => Modular.get<CartCubit>(),
-    child: const CartPage()));
-
+    r.child('/',
+        child: (context) => BlocProvider(
+            create: (context) => Modular.get<CartCubit>(),
+            child: const CartPage()));
   }
 }
