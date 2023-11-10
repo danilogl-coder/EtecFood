@@ -14,6 +14,24 @@ class BaseScreen extends StatelessWidget
         title: const Text('base screen'),
         elevation: 0,
       ),
+      body: Stack(
+        children: [
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+             Color.fromRGBO(37, 39, 62, 1.0),
+            Color.fromARGB(255, 108, 108, 180)
+            ], 
+            begin: Alignment.topCenter, end: Alignment.bottomCenter)
+          ),
+        ),
+        CustomScrollView(
+          slivers: [
+          
+          ],
+        )
+        ],
+      ),
       
     );
   }
