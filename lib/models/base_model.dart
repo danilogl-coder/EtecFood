@@ -9,7 +9,7 @@ class BaseModel
 
  BaseModel.fromDocument(DocumentSnapshot document)
  {
-  name = document.get('name') as String;
+  name = document.get('name') as String ?? "";
   type = document.get('type') as String;
   items = (document.get('items') as List).map((e) => 
   BaseItems.fromMap(e as Map<String, dynamic>)).toList();

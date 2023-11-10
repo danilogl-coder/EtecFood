@@ -1,11 +1,28 @@
+import 'package:etecfood/screen/base/base_controller.dart';
+import 'package:etecfood/screen/base/base_cubit.dart';
+import 'package:etecfood/screen/base/base_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'drawer/custom_drawer.dart';
 
-class BaseScreen extends StatelessWidget 
+class BaseScreen extends StatefulWidget 
 {
   const BaseScreen({super.key});
 
+  @override
+  State<BaseScreen> createState() => _BaseScreenState();
+}
+
+class _BaseScreenState extends State<BaseScreen> {
+  @override
+  void initState() {
+  Modular.get<BaseController>().loadAllProduct();
+  BlocProvider.of<BaseCubit>(context).updateBase();
+    
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -27,7 +44,23 @@ class BaseScreen extends StatelessWidget
         ),
         CustomScrollView(
           slivers: [
-          
+          BlocBuilder<BaseCubit, BaseState>(
+            builder: (context, state) {
+            final List<Widget>? children = state.baseModel?.map((section) {
+              switch (section.type)
+              {
+                case 'List':
+                return Container(child:  Text('1'),);
+                case 'Staggered':
+                return Container(child: Text('2'),);
+
+                default:
+                return Container();
+              }
+            }).toList();
+            
+            return SliverList(delegate: SliverChildListDelegate(children!));
+            },)
           ],
         )
         ],

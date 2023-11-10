@@ -1,7 +1,6 @@
 
 import 'package:etecfood/helpers/firebase_base_helper.dart';
 import 'package:etecfood/models/auth_guard.dart';
-import 'package:etecfood/models/product_model.dart';
 import 'package:etecfood/screen/base/base_controller.dart';
 import 'package:etecfood/screen/base/base_cubit.dart';
 import 'package:etecfood/screen/base/base_screen.dart';

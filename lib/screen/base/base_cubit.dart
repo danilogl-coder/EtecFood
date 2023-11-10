@@ -4,10 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BaseCubit extends Cubit<BaseState>
 {
-  BaseCubit() : super(BaseState());
+  BaseCubit() : super(BaseState(baseModel: []));
 
   setBaseModel(List<BaseModel>? value)
   {
     emit(BaseState(baseModel: value));
+  }
+
+  updateBase()
+  {
+    emit(BaseState(baseModel: state.baseModel));
   }
 }
