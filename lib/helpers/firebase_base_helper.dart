@@ -7,15 +7,16 @@ List<BaseModel> baseList = [];
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 //Carregar tudo
-Future<void> loadSections() async 
+Future loadSections() async 
 {
-  firestore.collection('home').snapshots().listen((snapshot) {
+  QuerySnapshot homeRef = await firestore.collection('home').get();
   baseList.clear();
-  for(final DocumentSnapshot document in snapshot.docs)
+  for(final DocumentSnapshot document in homeRef.docs)
   {
-    baseList.add(BaseModel.fromDocument(document));
+  BaseModel base = BaseModel.fromDocument(document);
+  baseList.add(base);
   }
+  return baseList;
   
-   });
 }
 }

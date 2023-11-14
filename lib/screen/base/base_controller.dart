@@ -12,11 +12,13 @@ class BaseController {
   final FirebaseBaseHelper helper;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final BaseCubit baseCubit;
+  List<BaseModel>? baseList;
 
   //Carregar todos os produtos
-  Future<void> loadAllProduct() async
+  Future loadAllProduct() async
   {
-  await helper.loadSections();
-  helper.baseList;
+  baseList = await helper.loadSections();
+  baseCubit.setBaseModel(baseList);
+  return baseList;
   }
 }

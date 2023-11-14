@@ -9,10 +9,7 @@ class BaseCubit extends Cubit<BaseState>
   setBaseModel(List<BaseModel>? value)
   {
     emit(BaseState(baseModel: value));
+    
   }
 
-  updateBase()
-  {
-    emit(BaseState(baseModel: state.baseModel));
-  }
 }
