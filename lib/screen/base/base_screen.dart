@@ -7,22 +7,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'drawer/custom_drawer.dart';
 
-class BaseScreen extends StatefulWidget 
+class BaseScreen extends StatelessWidget 
 {
   const BaseScreen({super.key});
 
-  @override
-  State<BaseScreen> createState() => _BaseScreenState();
-}
-
-class _BaseScreenState extends State<BaseScreen> {
-  @override
-  void initState() {
-  Modular.get<BaseController>().loadAllProduct();
-  BlocProvider.of<BaseCubit>(context).updateBase();
-    
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -45,8 +33,10 @@ class _BaseScreenState extends State<BaseScreen> {
         CustomScrollView(
           slivers: [
           BlocBuilder<BaseCubit, BaseState>(
-            builder: (context, state) {
-            final List<Widget>? children = state.baseModel?.map((section) {
+            builder: (context, state) 
+            
+            {
+            final List<Widget> children = state.baseModel!.map((section) {
               switch (section.type)
               {
                 case 'List':
