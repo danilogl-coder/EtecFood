@@ -20,13 +20,9 @@ class BaseModule extends Module {
 
   @override
   void routes(r) {
-    r.child("/", child: (context) => FutureBuilder(
-      future: Modular.get<BaseController>().loadAllProduct(),
-      builder: (context, snapshot) => snapshot.hasData ? BlocProvider(
-        create: (context) => BaseCubit(),
-        child: const BaseScreen(), ) : const Padding(padding: EdgeInsets.all(12.0), 
-        child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(Colors.white),),),
-    ), guards: [AuthGuard()]);
+    r.child("/", child: (context) => BlocProvider(
+      create: (context) => BaseCubit(),
+      child: const BaseScreen()), guards: [AuthGuard()]);
     
     
   }

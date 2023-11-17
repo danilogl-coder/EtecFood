@@ -15,7 +15,7 @@ class ProductController {
   final FirebaseCartHelper cartHelper;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final ProductCubit productCubit;
-
+   List<ProductModel>? allProducts = [];
   List<ProductModel> get filteredProducts {
     final List<ProductModel> filteredProduct = [];
     if (productCubit.state.search == null) {
@@ -44,5 +44,16 @@ class ProductController {
     }
 
     await cartHelper.addToCart(cartModel);
+  }
+
+  Future<ProductModel?> findProductById(String? id)
+  async {
+   try {
+    allProducts = await helper.loadAllProducts();
+    return allProducts!.firstWhere((p) => p.id == id );
+    } catch (e) {
+    return null;
+    }
+    
   }
 }
