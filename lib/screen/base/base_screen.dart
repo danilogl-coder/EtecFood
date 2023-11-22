@@ -15,58 +15,61 @@ class BaseScreen extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder(
-      future: Modular.get<BaseController>().loadAllProduct(),
-      builder: (context, snapshot) => snapshot.hasData ? Scaffold(
-        drawer: const CustomDrawer(),
-        appBar: AppBar(
-          title: const Text('base screen'),
-          elevation: 0,
-        ),
-        body: Stack(
-          children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-               Color.fromRGBO(37, 39, 62, 1.0),
-              Color.fromARGB(255, 108, 108, 180)
-              ], 
-              begin: Alignment.topCenter, end: Alignment.bottomCenter)
-            ),
+    Modular.get<BaseController>().loadAllProduct();
+    return Scaffold(
+      drawer: const CustomDrawer(),
+      appBar: AppBar(
+        title: const Text('base screen'),
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+             Color.fromRGBO(37, 39, 62, 1.0),
+            Color.fromARGB(255, 108, 108, 180)
+            ], 
+            begin: Alignment.topCenter, end: Alignment.bottomCenter)
           ),
-          CustomScrollView(
-            slivers: [
-            BlocBuilder<BaseCubit, BaseState>(
-              builder: (context, state) 
-              {
-              BlocProvider.of<BaseCubit>(context).setBaseModel(snapshot.data);
-              final List<Widget> children = state.baseModel!.map((section) {
-                switch (section.type)
-                {
-                  case 'List':
-                  return SectionList(section: section,);
-                  case 'Staggered':
-                  return SectionStaggered(section: section,);
-    
-                  default:
-                  return Container();
-                }
-              }).toList();
-              
-              return SliverList(delegate: SliverChildListDelegate(children));
-              },)
-            ],
-          )
-          ],
         ),
-        
-      ) : const Padding(
-                                        padding: EdgeInsets.all(12.0),
-                                        child: CircularProgressIndicator(
-                                          valueColor: AlwaysStoppedAnimation(
-                                              Colors.white),
-                                        ),
-                                      ),
+        CustomScrollView(
+          slivers: [
+          BlocBuilder<BaseCubit, BaseState>(
+            builder: (context, state) 
+            
+            {
+            List<Widget> children = state.carregando ?
+            [ const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(
+                      Colors.white
+                    ),
+                  ),
+                )] : 
+              state.baseModel!.map((section) {
+              
+               switch (section.type)
+              {
+                case 'List':
+                return SectionList(section: section,);
+                case 'Staggered':
+                return SectionStaggered(section: section,);
+    
+                default:
+                return Container();
+              }
+            }).toList();
+              
+            
+            
+            return SliverList(delegate: SliverChildListDelegate(children));
+            },)
+          ],
+        )
+        ],
+      ),
+      
     );
   }
 }

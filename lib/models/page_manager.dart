@@ -11,6 +11,7 @@ class PageManager extends Module {
   @override
   void binds(i) {
     i.addLazySingleton<FirebaseLoginHelper>(FirebaseLoginHelper.new);
+
   }
 
   //Rotas

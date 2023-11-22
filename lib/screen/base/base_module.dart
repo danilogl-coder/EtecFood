@@ -1,10 +1,13 @@
 
 import 'package:etecfood/helpers/firebase_base_helper.dart';
+import 'package:etecfood/helpers/firebase_cart_helper.dart';
+import 'package:etecfood/helpers/firebase_product_helper.dart';
 import 'package:etecfood/models/auth_guard.dart';
 import 'package:etecfood/screen/base/base_controller.dart';
 import 'package:etecfood/screen/base/base_cubit.dart';
 import 'package:etecfood/screen/base/base_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:etecfood/screen/core/core_module.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -19,9 +22,13 @@ class BaseModule extends Module {
   }
 
   @override
+  // TODO: implement imports
+  List<Module> get imports => [CoreModule()];
+
+  @override
   void routes(r) {
     r.child("/", child: (context) => BlocProvider(
-      create: (context) => BaseCubit(),
+      create: (context) => Modular.get<BaseCubit>(),
       child: const BaseScreen()), guards: [AuthGuard()]);
     
     

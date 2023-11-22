@@ -1,7 +1,7 @@
 import 'package:etecfood/models/base_items.dart';
 import 'package:etecfood/screen/products/products_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 
@@ -13,13 +13,13 @@ class ItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async {
       if(item.product != null )
       {
-        final product = context.read<ProductController>().findProductById(item.product);
+        final product = await Modular.get<ProductController>().findProductById(item.product);
         if(product != null)
         {
-        Navigator.of(context).pushNamed('/product', arguments: product);
+        Navigator.of(context).pushNamed('/ProductsModule/ProductPage', arguments: product);
         }
       }
       },
