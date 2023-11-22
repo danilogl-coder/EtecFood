@@ -19,6 +19,13 @@ class BaseScreen extends StatelessWidget
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            padding: const EdgeInsets.only(right: 30),
+            onPressed: (){
+              Modular.to.pushNamed('/CartModule');
+            }, icon: const Icon(Icons.shopping_cart))
+        ],
         title: const Text('base screen'),
         elevation: 0,
       ),
@@ -37,7 +44,7 @@ class BaseScreen extends StatelessWidget
           slivers: [
           BlocBuilder<BaseCubit, BaseState>(
             builder: (context, state) 
-            
+
             {
             List<Widget> children = state.carregando ?
             [ const Center(
