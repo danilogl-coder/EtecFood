@@ -6,8 +6,6 @@ import 'package:etecfood/models/auth_guard.dart';
 import 'package:etecfood/screen/base/base_controller.dart';
 import 'package:etecfood/screen/base/base_cubit.dart';
 import 'package:etecfood/screen/base/base_screen.dart';
-import 'package:etecfood/screen/core/core_module.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -21,10 +19,7 @@ class BaseModule extends Module {
     
   }
 
-  @override
-  // TODO: implement imports
-  List<Module> get imports => [CoreModule()];
-
+  
   @override
   void routes(r) {
     r.child("/", child: (context) => BlocProvider(

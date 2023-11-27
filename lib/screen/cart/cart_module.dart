@@ -9,18 +9,18 @@ import 'package:flutter_modular/flutter_modular.dart';
 class CartModule extends Module {
   @override
   void binds(i) {
-    i.addLazySingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
-    i.addLazySingleton<CartCubit>(CartCubit.new);
-    i.addLazySingleton<PriceCardCubit>(PriceCardCubit.new);
+    i.addSingleton<FirebaseCartHelper>(FirebaseCartHelper.new);
+    i.addSingleton<CartCubit>(CartCubit.new);
+    i.addSingleton<PriceCardCubit>(() => PriceCardCubit(0.0));
     i.addInstance<CartController>(CartController(
-        helper: i(), cartCubit: i(), priceCardCubit: PriceCardCubit(0.0)));
+        helper: i(), cartCubit: i(), priceCardCubit: i()));
   }
 
   @override
   void routes(r) {
     r.child('/',
         child: (context) => BlocProvider(
-              create: (context) => PriceCardCubit(0.0),
+              create: (context) => Modular.get<PriceCardCubit>(),
               child: BlocProvider(
                   create: (context) => Modular.get<CartCubit>(),
                   child: const CartPage()),
