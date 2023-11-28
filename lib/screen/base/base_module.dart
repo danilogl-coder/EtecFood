@@ -10,7 +10,7 @@ import 'package:etecfood/screen/products/products_controller.dart';
 import 'package:etecfood/screen/products/products_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
+  
 class BaseModule extends Module {
   @override
   void binds(i) {
